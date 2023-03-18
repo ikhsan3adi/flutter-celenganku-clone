@@ -48,8 +48,8 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
           )
         ],
         bottom: TabBar(
-          labelColor: theme.primaryColor,
-          indicatorColor: theme.primaryColor,
+          labelColor: theme.colorScheme.primary,
+          indicatorColor: theme.colorScheme.primary,
           indicatorPadding: const EdgeInsets.symmetric(horizontal: 48),
           indicatorWeight: 3,
           controller: _tabController,

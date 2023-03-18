@@ -6,6 +6,11 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(home: HomeScreen());
+    return MaterialApp(
+      home: const HomeScreen(),
+      theme: ThemeData(),
+      darkTheme: ThemeData(brightness: Brightness.dark),
+      themeMode: ThemeMode.light,
+    );
   }
 }
