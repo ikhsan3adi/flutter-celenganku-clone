@@ -32,7 +32,7 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
         elevation: 0,
         backgroundColor: Colors.transparent,
         foregroundColor: theme.textTheme.bodyLarge!.color,
-        title: const Text("Celenganku"),
+        title: const Text("Celenganku", style: TextStyle(fontWeight: FontWeight.normal)),
         actions: [
           IconButton(
             onPressed: () {},

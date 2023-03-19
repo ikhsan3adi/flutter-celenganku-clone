@@ -1,3 +1,4 @@
+import 'package:celenganku_app_clone/wish_detail/wish_detail.dart';
 import 'package:flutter/material.dart';
 
 class WishItemCard extends StatelessWidget {
@@ -68,7 +69,10 @@ class WishItemCard extends StatelessWidget {
                   ),
                   const Divider(),
                   const Center(
-                    child: Text("Estimasi : 893 Minggu Lagi", style: TextStyle(fontWeight: FontWeight.bold)),
+                    child: Text(
+                      "Estimasi : 893 Minggu Lagi",
+                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                    ),
                   )
                 ],
               ),
