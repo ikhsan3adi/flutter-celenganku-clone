@@ -1,6 +1,8 @@
 import 'package:celenganku_app_clone/achieved/achieved.dart';
+import 'package:celenganku_app_clone/home/home.dart';
 import 'package:celenganku_app_clone/on_going/on_going.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -35,7 +37,10 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
         title: const Text("Celenganku", style: TextStyle(fontWeight: FontWeight.normal)),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () => showDialog(
+              context: context,
+              builder: (context) => _showChangeThemeDialog(),
+            ),
             icon: const Icon(Icons.brightness_medium),
           ),
           PopupMenuButton(
@@ -65,6 +70,52 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
           OnGoingPage(),
           AchievedPage(),
         ],
+      ),
+    );
+  }
+
+  Widget _showChangeThemeDialog() {
+    return Dialog(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 16),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 24, vertical: 8),
+              child: Text("Pilih Tema", style: TextStyle(fontSize: 24)),
+            ),
+            BlocBuilder<AppThemeCubit, AppThemeState>(
+              builder: (context, state) {
+                return Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    RadioListTile(
+                      value: ThemeMode.system,
+                      groupValue: state.themeMode,
+                      onChanged: (value) => context.read<AppThemeCubit>().themeChanged(value!),
+                      title: const Text("Default"),
+                    ),
+                    RadioListTile(
+                      value: ThemeMode.light,
+                      groupValue: state.themeMode,
+                      onChanged: (value) => context.read<AppThemeCubit>().themeChanged(value!),
+                      title: const Text("Terang"),
+                    ),
+                    RadioListTile(
+                      value: ThemeMode.dark,
+                      groupValue: state.themeMode,
+                      onChanged: (value) => context.read<AppThemeCubit>().themeChanged(value!),
+                      title: const Text("Gelap"),
+                    ),
+                  ],
+                );
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
