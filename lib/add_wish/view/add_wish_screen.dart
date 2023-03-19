@@ -6,70 +6,73 @@ class AddWishScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: Form(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 16),
-              child: AspectRatio(
-                aspectRatio: 16 / 9,
-                child: InkWell(
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: theme.colorScheme.primary,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Center(
-                      child: Icon(
-                        Icons.add_photo_alternate_outlined,
-                        size: 100,
-                        color: theme.colorScheme.onPrimary,
+    return SingleChildScrollView(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: Form(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 16),
+                child: AspectRatio(
+                  aspectRatio: 16 / 9,
+                  child: InkWell(
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: theme.colorScheme.primary,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Center(
+                        child: Icon(
+                          Icons.add_photo_alternate_outlined,
+                          size: 100,
+                          color: theme.colorScheme.onPrimary,
+                        ),
                       ),
                     ),
                   ),
                 ),
               ),
-            ),
-            const _MyTextFormField(
-              labelText: 'Nama Tabungan',
-              prefixIcon: Icons.notes,
-            ),
-            const _MyTextFormField(
-              labelText: 'Target Tabungan',
-              prefixIcon: Icons.money,
-            ),
-            Text(
-              "Rencana Pengisian",
-              style: theme.textTheme.titleSmall?.copyWith(color: theme.colorScheme.primary),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  _CustomRadioOutlinedButton(
-                    borderRadius: BorderRadius.horizontal(left: Radius.circular(50)),
-                    labelText: 'Harian',
-                  ),
-                  _CustomRadioOutlinedButton(
-                    borderRadius: null,
-                    labelText: 'Mingguan',
-                  ),
-                  _CustomRadioOutlinedButton(
-                    borderRadius: BorderRadius.horizontal(right: Radius.circular(50)),
-                    labelText: 'Bulanan',
-                  ),
-                ],
+              const _MyTextFormField(
+                labelText: 'Nama Tabungan',
+                prefixIcon: Icons.notes,
               ),
-            ),
-            const _MyTextFormField(
-              labelText: 'Nominal Pengisian',
-              prefixIcon: Icons.money,
-            ),
-          ],
+              const _MyTextFormField(
+                labelText: 'Target Tabungan',
+                prefixIcon: Icons.money,
+              ),
+              Text(
+                "Rencana Pengisian",
+                style: theme.textTheme.titleSmall?.copyWith(color: theme.colorScheme.primary),
+              ),
+              const SizedBox(height: 8),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    _CustomRadioOutlinedButton(
+                      borderRadius: BorderRadius.horizontal(left: Radius.circular(50)),
+                      labelText: 'Harian',
+                    ),
+                    _CustomRadioOutlinedButton(
+                      borderRadius: null,
+                      labelText: 'Mingguan',
+                    ),
+                    _CustomRadioOutlinedButton(
+                      borderRadius: BorderRadius.horizontal(right: Radius.circular(50)),
+                      labelText: 'Bulanan',
+                    ),
+                  ],
+                ),
+              ),
+              const _MyTextFormField(
+                labelText: 'Nominal Pengisian',
+                prefixIcon: Icons.money,
+              ),
+            ],
+          ),
         ),
       ),
     );

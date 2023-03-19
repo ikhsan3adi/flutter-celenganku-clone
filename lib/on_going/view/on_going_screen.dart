@@ -6,15 +6,15 @@ class OnGoingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: ListView.builder(
-        shrinkWrap: true,
-        itemCount: 3,
-        itemBuilder: (context, index) {
-          return const WishItemCard();
-        },
-      ),
+    return ListView.builder(
+      shrinkWrap: true,
+      itemCount: 3,
+      itemBuilder: (context, index) {
+        return const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 16),
+          child: WishItemCard(),
+        );
+      },
     );
   }
 }
