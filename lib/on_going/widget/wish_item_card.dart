@@ -80,7 +80,9 @@ class WishItemCard extends StatelessWidget {
               child: InkWell(
                 splashColor: theme.colorScheme.primary.withOpacity(0.2),
                 borderRadius: BorderRadius.circular(15),
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(context, WishDetailPage.route());
+                },
               ),
             ),
           )
