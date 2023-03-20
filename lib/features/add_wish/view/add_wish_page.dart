@@ -1,5 +1,6 @@
 import 'package:celenganku_app_clone/features/features.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AddWishPage extends StatelessWidget {
   const AddWishPage({super.key});
@@ -10,6 +11,18 @@ class AddWishPage extends StatelessWidget {
       builder: (_) => const AddWishPage(),
     );
   }
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => AddWishBloc(),
+      child: const _AddWishView(),
+    );
+  }
+}
+
+class _AddWishView extends StatelessWidget {
+  const _AddWishView();
 
   @override
   Widget build(BuildContext context) {
