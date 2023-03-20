@@ -1,10 +1,16 @@
 part of 'achieved_bloc.dart';
 
-abstract class AchievedState extends Equatable {
-  const AchievedState();
-  
+class AchievedState extends Equatable {
+  const AchievedState({this.wishList = const <Wish>[]});
+
+  final List<Wish> wishList;
+
+  AchievedState copyWith({List<Wish>? wishList}) {
+    return AchievedState(wishList: wishList ?? this.wishList);
+  }
+
   @override
-  List<Object> get props => [];
+  List<Object> get props => [wishList];
 }
 
-class AchievedInitial extends AchievedState {}
+class AchievedLoadingState extends AchievedState {}
