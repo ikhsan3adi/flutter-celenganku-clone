@@ -7,6 +7,7 @@ part of 'wish.dart';
 // **************************************************************************
 
 Wish _$WishFromJson(Map<String, dynamic> json) => Wish(
+      id: json['id'] as String,
       name: json['name'] as String,
       savingTarget: json['savingTarget'] as int,
       savingPlan: $enumDecode(_$SavingPlanEnumMap, json['savingPlan']),
@@ -18,9 +19,11 @@ Wish _$WishFromJson(Map<String, dynamic> json) => Wish(
       completedAt: json['completedAt'] == null
           ? null
           : DateTime.parse(json['completedAt'] as String),
+      imagePath: json['imagePath'] as String?,
     );
 
 Map<String, dynamic> _$WishToJson(Wish instance) => <String, dynamic>{
+      'id': instance.id,
       'name': instance.name,
       'savingTarget': instance.savingTarget,
       'savingPlan': _$SavingPlanEnumMap[instance.savingPlan]!,
@@ -28,6 +31,7 @@ Map<String, dynamic> _$WishToJson(Wish instance) => <String, dynamic>{
       'listSaving': instance.listSaving,
       'createdAt': instance.createdAt.toIso8601String(),
       'completedAt': instance.completedAt?.toIso8601String(),
+      'imagePath': instance.imagePath,
     };
 
 const _$SavingPlanEnumMap = {

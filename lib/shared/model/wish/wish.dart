@@ -1,5 +1,3 @@
-import 'dart:typed_data';
-
 import 'package:celenganku_app_clone/shared/shared.dart';
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
@@ -11,6 +9,7 @@ enum SavingPlan { daily, weekly, monthly }
 @JsonSerializable()
 class Wish extends Equatable {
   const Wish({
+    required this.id,
     required this.name,
     required this.savingTarget,
     required this.savingPlan,
@@ -18,8 +17,10 @@ class Wish extends Equatable {
     required this.listSaving,
     required this.createdAt,
     this.completedAt,
-    this.imageByte,
+    this.imagePath,
   });
+
+  final String id;
 
   final String name;
   final int savingTarget;
@@ -31,7 +32,7 @@ class Wish extends Equatable {
   final DateTime createdAt;
   final DateTime? completedAt;
 
-  final Uint8List? imageByte;
+  final String? imagePath;
 
   Wish copyWith({
     String? name,
@@ -41,9 +42,10 @@ class Wish extends Equatable {
     List<Saving>? listSaving,
     DateTime? createdAt,
     DateTime? completedAt,
-    Uint8List? imageByte,
+    String? imagePath,
   }) {
     return Wish(
+      id: id,
       name: name ?? this.name,
       savingTarget: savingTarget ?? this.savingTarget,
       savingPlan: savingPlan ?? this.savingPlan,
@@ -51,7 +53,7 @@ class Wish extends Equatable {
       listSaving: listSaving ?? this.listSaving,
       createdAt: createdAt ?? this.createdAt,
       completedAt: completedAt ?? this.completedAt,
-      imageByte: imageByte ?? this.imageByte,
+      imagePath: imagePath ?? this.imagePath,
     );
   }
 
