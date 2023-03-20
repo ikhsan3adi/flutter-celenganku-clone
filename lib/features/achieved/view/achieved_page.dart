@@ -1,4 +1,4 @@
-import 'package:celenganku_app_clone/achieved/achieved.dart';
+import 'package:celenganku_app_clone/features/features.dart';
 import 'package:flutter/material.dart';
 
 class AchievedPage extends StatelessWidget {

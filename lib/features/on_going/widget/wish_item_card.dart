@@ -1,4 +1,4 @@
-import 'package:celenganku_app_clone/wish_detail/wish_detail.dart';
+import 'package:celenganku_app_clone/features/features.dart';
 import 'package:flutter/material.dart';
 
 class WishItemCard extends StatelessWidget {

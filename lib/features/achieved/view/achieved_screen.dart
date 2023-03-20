@@ -1,8 +1,8 @@
-import 'package:celenganku_app_clone/on_going/on_going.dart';
+import 'package:celenganku_app_clone/features/features.dart';
 import 'package:flutter/material.dart';
 
-class OnGoingScreen extends StatelessWidget {
-  const OnGoingScreen({super.key});
+class AchievedScreen extends StatelessWidget {
+  const AchievedScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +12,7 @@ class OnGoingScreen extends StatelessWidget {
       itemBuilder: (context, index) {
         return const Padding(
           padding: EdgeInsets.symmetric(horizontal: 16),
-          child: WishItemCard(),
+          child: AchievedWishItemCard(),
         );
       },
     );

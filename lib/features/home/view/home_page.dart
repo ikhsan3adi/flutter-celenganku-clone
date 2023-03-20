@@ -1,4 +1,4 @@
-import 'package:celenganku_app_clone/home/home.dart';
+import 'package:celenganku_app_clone/features/home/home.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 

@@ -1,5 +1,4 @@
-import 'package:celenganku_app_clone/add_wish/add_wish.dart';
-import 'package:celenganku_app_clone/on_going/on_going.dart';
+import 'package:celenganku_app_clone/features/features.dart';
 import 'package:flutter/material.dart';
 
 class OnGoingPage extends StatelessWidget {
