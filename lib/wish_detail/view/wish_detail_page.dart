@@ -1,5 +1,6 @@
 import 'package:celenganku_app_clone/wish_detail/wish_detail.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_expandable_fab/flutter_expandable_fab.dart';
 
 class WishDetailPage extends StatelessWidget {
   const WishDetailPage({super.key});
@@ -28,6 +29,8 @@ class WishDetailPage extends StatelessWidget {
         ),
       ),
       body: const WishDetailScreen(),
+      floatingActionButtonLocation: ExpandableFab.location,
+      floatingActionButton: const MyExpandableFab(),
     );
   }
 }
