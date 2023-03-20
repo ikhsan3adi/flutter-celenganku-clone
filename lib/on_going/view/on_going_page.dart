@@ -18,10 +18,10 @@ class OnGoingPage extends StatelessWidget {
           backgroundColor: theme.colorScheme.primary,
           foregroundColor: theme.colorScheme.onPrimary,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-          padding: const EdgeInsets.all(20),
+          padding: const EdgeInsets.all(16),
         ),
         icon: const Icon(Icons.add),
-        label: const Text("Tambah Celengan", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+        label: const Text("Tambah Celengan", style: TextStyle(fontWeight: FontWeight.bold)),
       ),
     );
   }
