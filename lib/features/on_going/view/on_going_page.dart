@@ -1,5 +1,7 @@
 import 'package:celenganku_app_clone/features/features.dart';
+import 'package:celenganku_app_clone/shared/repository/repository.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class OnGoingPage extends StatelessWidget {
   const OnGoingPage({super.key});
@@ -8,7 +10,12 @@ class OnGoingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
     return Scaffold(
-      body: const OnGoingScreen(),
+      body: BlocProvider(
+        create: (context) {
+          return OnGoingBloc(wishRepository: context.read<WishRepository>())..add(FetchWishEvent());
+        },
+        child: const OnGoingScreen(),
+      ),
       floatingActionButton: ElevatedButton.icon(
         onPressed: () {
           Navigator.push(context, AddWishPage.route());

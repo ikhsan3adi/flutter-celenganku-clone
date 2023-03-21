@@ -57,6 +57,30 @@ class Wish extends Equatable {
     );
   }
 
+  int getTotalSaving() {
+    if (listSaving.isEmpty) return 0;
+    return listSaving.map((e) => e.savingNominal).toList().reduce((value1, value2) => value1 + value2);
+  }
+
+  double getSavingPercentage() {
+    return (getTotalSaving() / savingTarget) * 100;
+  }
+
+  int getEstimatedRemainingTime() {
+    return ((savingTarget - getTotalSaving()) / savingNominal).ceil();
+  }
+
+  static String savingPlanTimeName(SavingPlan savingPlan) {
+    switch (savingPlan) {
+      case SavingPlan.daily:
+        return 'Hari';
+      case SavingPlan.weekly:
+        return 'Minggu';
+      case SavingPlan.monthly:
+        return 'Bulan';
+    }
+  }
+
   factory Wish.fromJson(Map<String, dynamic> json) => _$WishFromJson(json);
 
   Map<String, dynamic> toJson() => _$WishToJson(this);

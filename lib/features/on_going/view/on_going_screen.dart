@@ -15,9 +15,9 @@ class OnGoingScreen extends StatelessWidget {
           shrinkWrap: true,
           itemCount: state.wishList.length,
           itemBuilder: (context, index) {
-            return const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16),
-              child: WishItemCard(),
+            return Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: WishItemCard(wish: state.wishList[index]),
             );
           },
         );

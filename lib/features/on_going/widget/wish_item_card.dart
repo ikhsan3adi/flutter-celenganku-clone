@@ -1,8 +1,11 @@
 import 'package:celenganku_app_clone/features/features.dart';
+import 'package:celenganku_app_clone/shared/shared.dart';
 import 'package:flutter/material.dart';
 
 class WishItemCard extends StatelessWidget {
-  const WishItemCard({super.key});
+  const WishItemCard({super.key, required this.wish});
+
+  final Wish wish;
 
   @override
   Widget build(BuildContext context) {
@@ -19,8 +22,8 @@ class WishItemCard extends StatelessWidget {
               child: Column(
                 children: [
                   Row(
-                    children: const [
-                      Text("MacBook Pro M2", style: TextStyle(fontSize: 24)),
+                    children: [
+                      Text(wish.name, style: const TextStyle(fontSize: 24)),
                     ],
                   ),
                   Padding(
@@ -41,9 +44,12 @@ class WishItemCard extends StatelessWidget {
                       children: [
                         Expanded(
                           child: Column(
-                            children: const [
-                              Text("Rp. 20.999.000", style: TextStyle(fontSize: 24)),
-                              Text("Rp. 25.000 Perminggu", style: TextStyle(fontWeight: FontWeight.bold)),
+                            children: [
+                              Text("Rp. ${wish.savingTarget}", style: const TextStyle(fontSize: 24)),
+                              Text(
+                                "Rp. ${wish.savingNominal}  Per${Wish.savingPlanTimeName(wish.savingPlan).toLowerCase()}",
+                                style: const TextStyle(fontWeight: FontWeight.bold),
+                              ),
                             ],
                           ),
                         ),
@@ -56,11 +62,14 @@ class WishItemCard extends StatelessWidget {
                               Transform.scale(
                                 scale: 1.2,
                                 child: CircularProgressIndicator.adaptive(
-                                  value: 0.2,
+                                  value: wish.getSavingPercentage() / 10,
                                   backgroundColor: theme.primaryColorLight,
                                 ),
                               ),
-                              const Text("8%", style: TextStyle(fontWeight: FontWeight.bold)),
+                              Text(
+                                "${wish.getSavingPercentage().toStringAsFixed(0)}%",
+                                style: const TextStyle(fontWeight: FontWeight.bold),
+                              ),
                             ],
                           ),
                         ),
@@ -68,10 +77,10 @@ class WishItemCard extends StatelessWidget {
                     ),
                   ),
                   const Divider(),
-                  const Center(
+                  Center(
                     child: Text(
-                      "Estimasi : 893 Minggu Lagi",
-                      style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                      "Estimasi : ${wish.getEstimatedRemainingTime()} ${Wish.savingPlanTimeName(wish.savingPlan)} Lagi",
+                      style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                     ),
                   )
                 ],
@@ -85,7 +94,7 @@ class WishItemCard extends StatelessWidget {
                 splashColor: theme.colorScheme.primary.withOpacity(0.2),
                 borderRadius: BorderRadius.circular(15),
                 onTap: () {
-                  Navigator.push(context, WishDetailPage.route());
+                  Navigator.push(context, WishDetailPage.route(wish: wish));
                 },
               ),
             ),

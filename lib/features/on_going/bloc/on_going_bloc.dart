@@ -6,9 +6,15 @@ part 'on_going_event.dart';
 part 'on_going_state.dart';
 
 class OnGoingBloc extends Bloc<OnGoingEvent, OnGoingState> {
-  OnGoingBloc() : super(const OnGoingState()) {
+  OnGoingBloc({required WishRepository wishRepository})
+      : _wishRepository = wishRepository,
+        super(const OnGoingState()) {
     on<FetchWishEvent>(_fetchWishList);
   }
 
-  Future<void> _fetchWishList(FetchWishEvent event, Emitter<OnGoingState> emit) async {}
+  final WishRepository _wishRepository;
+
+  Future<void> _fetchWishList(FetchWishEvent event, Emitter<OnGoingState> emit) async {
+    emit(OnGoingState(wishList: _wishRepository.getOnGoingWishList()));
+  }
 }

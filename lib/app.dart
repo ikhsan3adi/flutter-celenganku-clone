@@ -1,15 +1,21 @@
 import 'package:celenganku_app_clone/features/features.dart';
+import 'package:celenganku_app_clone/shared/shared.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({super.key, required this.wishRepository});
+
+  final WishRepository wishRepository;
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (_) => AppThemeCubit(),
-      child: const MyAppView(),
+    return RepositoryProvider(
+      create: (context) => wishRepository,
+      child: BlocProvider(
+        create: (_) => AppThemeCubit(),
+        child: const MyAppView(),
+      ),
     );
   }
 }
