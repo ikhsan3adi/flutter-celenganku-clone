@@ -6,9 +6,13 @@ part 'add_wish_event.dart';
 part 'add_wish_state.dart';
 
 class AddWishBloc extends Bloc<AddWishEvent, AddWishState> {
-  AddWishBloc() : super(const AddWishState()) {
+  AddWishBloc({required WishRepository wishRepository})
+      : _wishRepository = wishRepository,
+        super(const AddWishState()) {
     on<SaveWishEvent>(_saveWish);
   }
+
+  final WishRepository _wishRepository;
 
   Future<void> _saveWish(SaveWishEvent event, Emitter<AddWishState> emit) async {}
 }
