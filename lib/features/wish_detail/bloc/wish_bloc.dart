@@ -6,12 +6,15 @@ part 'wish_event.dart';
 part 'wish_state.dart';
 
 class WishBloc extends Bloc<WishEvent, WishState> {
-  WishBloc({required Wish wish})
+  WishBloc({required Wish wish, required WishRepository wishRepository})
       : _wish = wish,
+        _wishRepository = wishRepository,
         super(WishState(wish: wish)) {
     on<AddSavingEvent>(_addSaving);
     on<TakeSavingEvent>(_takeSaving);
   }
+
+  final WishRepository _wishRepository;
 
   final Wish _wish;
 
