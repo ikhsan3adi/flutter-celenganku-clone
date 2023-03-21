@@ -6,7 +6,10 @@ part 'achieved_event.dart';
 part 'achieved_state.dart';
 
 class AchievedBloc extends Bloc<AchievedEvent, AchievedState> {
-  AchievedBloc() : super(const AchievedState()) {
+  AchievedBloc({required WishRepository wishRepository})
+      : _wishRepository = wishRepository,
+        super(const AchievedState()) {
     on<AchievedEvent>((event, emit) {});
   }
+  final WishRepository _wishRepository;
 }
