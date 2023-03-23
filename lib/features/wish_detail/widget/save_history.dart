@@ -16,11 +16,13 @@ class SaveHistory extends StatelessWidget {
         if (state.wish.listSaving.isEmpty) return const SizedBox();
 
         return Card(
-          margin: EdgeInsets.zero,
+          margin: const EdgeInsets.only(bottom: 128),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 28),
             child: ListView.builder(
+              physics: const NeverScrollableScrollPhysics(),
+              reverse: true,
               shrinkWrap: true,
               itemCount: state.wish.listSaving.length,
               itemBuilder: (context, index) {
@@ -43,6 +45,7 @@ class _SavingListItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isNegative = saving.savingNominal <= 0;
     return Column(
       children: [
         const SizedBox(height: 10),
@@ -59,12 +62,15 @@ class _SavingListItem extends StatelessWidget {
               Text(saving.message), // message
             ],
           ),
-          trailing: Text(
-            saving.savingNominal.toString(), // saving nominal
-            style: const TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 18,
-              color: Colors.red,
+          trailing: Padding(
+            padding: const EdgeInsets.only(top: 8.0),
+            child: Text(
+              "${isNegative ? '' : '+'} ${saving.savingNominal.toString()}", // saving nominal
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 18,
+                color: isNegative ? Colors.red : Colors.green,
+              ),
             ),
           ),
         ),
