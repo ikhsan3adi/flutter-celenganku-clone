@@ -20,8 +20,18 @@ class AddWishPage extends StatelessWidget {
   Widget build(BuildContext context) {
     WishRepository wishRepository = context.read<WishRepository>();
 
+    Wish newWish = Wish(
+      id: '0',
+      name: '',
+      savingTarget: 0,
+      savingPlan: SavingPlan.daily,
+      savingNominal: 0,
+      listSaving: const [],
+      createdAt: DateTime.now(),
+    );
+
     return BlocProvider(
-      create: (context) => AddWishBloc(wishRepository: wishRepository),
+      create: (context) => AddWishBloc(wishRepository: wishRepository, newWish: newWish),
       child: const _AddWishView(),
     );
   }
@@ -33,6 +43,9 @@ class _AddWishView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
+
+    GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -54,13 +67,20 @@ class _AddWishView extends StatelessWidget {
                   borderRadius: BorderRadius.circular(20),
                 ),
               ),
-              onPressed: () {},
+              onPressed: () {
+                if (formKey.currentState!.validate()) {
+                  Future(() => context.read<AddWishBloc>().add(const SaveWishEvent()))
+                      .then((value) => context.read<OnGoingBloc>().add(FetchWishEvent()));
+
+                  Navigator.pop(context);
+                }
+              },
               child: const Text("Simpan", style: TextStyle(fontWeight: FontWeight.bold)),
             ),
           ),
         ],
       ),
-      body: const AddWishScreen(),
+      body: AddWishScreen(formKey: formKey),
     );
   }
 }

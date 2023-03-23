@@ -1,7 +1,12 @@
+import 'package:celenganku_app_clone/features/add_wish/add_wish.dart';
+import 'package:celenganku_app_clone/shared/shared.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AddWishScreen extends StatelessWidget {
-  const AddWishScreen({super.key});
+  const AddWishScreen({super.key, required formKey}) : _formKey = formKey;
+
+  final GlobalKey<FormState> _formKey;
 
   @override
   Widget build(BuildContext context) {
@@ -10,38 +15,58 @@ class AddWishScreen extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16),
         child: Form(
+          key: _formKey,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 16),
-                child: AspectRatio(
-                  aspectRatio: 16 / 9,
-                  child: InkWell(
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: theme.colorScheme.primary,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Center(
-                        child: Icon(
-                          Icons.add_photo_alternate_outlined,
-                          size: 100,
-                          color: theme.colorScheme.onPrimary,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
+              const ImagePicker(),
+              BlocBuilder<AddWishBloc, AddWishState>(
+                builder: (context, state) {
+                  return MyTextFormField(
+                    controller: TextEditingController.fromValue(TextEditingValue(text: state.newWish.name)),
+                    labelText: 'Nama Tabungan',
+                    prefixIcon: Icons.notes,
+                    onChanged: (value) {
+                      context.read<AddWishBloc>().add(WishNameChanged(wishName: value ?? ''));
+                    },
+                    validator: (value) {
+                      if (value!.isEmpty || value == '') {
+                        context.read<AddWishBloc>().add(const WishNameValidation(isNameValid: false));
+
+                        return 'Nama tabungan harus diisi';
+                      }
+                      context.read<AddWishBloc>().add(const WishNameValidation(isNameValid: true));
+                      return null;
+                    },
+                    isValid: state.isNameValid,
+                  );
+                },
               ),
-              const _MyTextFormField(
-                labelText: 'Nama Tabungan',
-                prefixIcon: Icons.notes,
+              BlocBuilder<AddWishBloc, AddWishState>(
+                builder: (context, state) {
+                  return MyTextFormField(
+                    controller: TextEditingController.fromValue(TextEditingValue(text: state.newWish.savingTarget.toString())),
+                    labelText: 'Target Tabungan',
+                    prefixIcon: Icons.money,
+                    prefixText: 'Rp.',
+                    isCurrency: true,
+                    onChanged: (value) {
+                      context.read<AddWishBloc>().add(WishSavingTargetChanged(value: value ?? '0'));
+                    },
+                    validator: (value) {
+                      if (value!.isEmpty || value == '') {
+                        context.read<AddWishBloc>().add(const WishTargetValidation(isSavingTargetValid: false));
+
+                        return 'Target tidak boleh kosong';
+                      }
+                      context.read<AddWishBloc>().add(const WishTargetValidation(isSavingTargetValid: true));
+                      return null;
+                    },
+                    isValid: state.isSavingTargetValid,
+                  );
+                },
               ),
-              const _MyTextFormField(
-                labelText: 'Target Tabungan',
-                prefixIcon: Icons.money,
-              ),
+              const SizedBox(height: 10),
               Text(
                 "Rencana Pengisian",
                 style: theme.textTheme.titleSmall?.copyWith(color: theme.colorScheme.primary),
@@ -52,76 +77,55 @@ class AddWishScreen extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: const [
-                    _CustomRadioOutlinedButton(
+                    CustomRadioOutlinedButton(
                       borderRadius: BorderRadius.horizontal(left: Radius.circular(50)),
                       labelText: 'Harian',
+                      value: SavingPlan.daily,
                     ),
-                    _CustomRadioOutlinedButton(
+                    CustomRadioOutlinedButton(
                       borderRadius: null,
                       labelText: 'Mingguan',
+                      value: SavingPlan.weekly,
                     ),
-                    _CustomRadioOutlinedButton(
+                    CustomRadioOutlinedButton(
                       borderRadius: BorderRadius.horizontal(right: Radius.circular(50)),
                       labelText: 'Bulanan',
+                      value: SavingPlan.monthly,
                     ),
                   ],
                 ),
               ),
-              const _MyTextFormField(
-                labelText: 'Nominal Pengisian',
-                prefixIcon: Icons.money,
+              BlocBuilder<AddWishBloc, AddWishState>(
+                builder: (context, state) {
+                  return MyTextFormField(
+                    controller: TextEditingController.fromValue(TextEditingValue(text: state.newWish.savingNominal.toString())),
+                    labelText: 'Nominal Pengisian',
+                    prefixIcon: Icons.money,
+                    prefixText: 'Rp.',
+                    isCurrency: true,
+                    onChanged: (value) {
+                      context.read<AddWishBloc>().add(WishSavingNominalChanged(value: value ?? '0'));
+                    },
+                    validator: (value) {
+                      if (value!.isEmpty || value == '' || int.parse((value).replaceAll('.', '')) <= 0) {
+                        context.read<AddWishBloc>().add(const WishNominalValidation(isSavingNominalValid: false));
+
+                        return 'Target per ${Wish.savingPlanTimeName(state.newWish.savingPlan).toLowerCase()} tidak boleh kosong';
+                      } else if (int.parse((value).replaceAll('.', '')) >= state.newWish.savingTarget) {
+                        context.read<AddWishBloc>().add(const WishNominalValidation(isSavingNominalValid: false));
+
+                        return 'Target per ${Wish.savingPlanTimeName(state.newWish.savingPlan).toLowerCase()} harus kurang dari target tabungan';
+                      }
+                      context.read<AddWishBloc>().add(const WishNominalValidation(isSavingNominalValid: true));
+                      return null;
+                    },
+                    isValid: state.isSavingNominalValid,
+                  );
+                },
               ),
             ],
           ),
         ),
-      ),
-    );
-  }
-}
-
-class _MyTextFormField extends StatelessWidget {
-  const _MyTextFormField({required this.labelText, required this.prefixIcon});
-
-  final IconData prefixIcon;
-  final String labelText;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 16),
-      child: TextFormField(
-        decoration: InputDecoration(
-          border: const OutlineInputBorder(),
-          prefixIcon: Icon(prefixIcon),
-          label: Text(labelText),
-        ),
-      ),
-    );
-  }
-}
-
-class _CustomRadioOutlinedButton extends StatelessWidget {
-  const _CustomRadioOutlinedButton({required this.borderRadius, required this.labelText});
-
-  final String labelText;
-  final BorderRadius? borderRadius;
-
-  @override
-  Widget build(BuildContext context) {
-    ThemeData theme = Theme.of(context);
-    return OutlinedButton(
-      onPressed: () {},
-      style: OutlinedButton.styleFrom(
-        // backgroundColor: theme.colorScheme.background,
-        // foregroundColor: theme.colorScheme.onBackground,
-        side: BorderSide(color: theme.colorScheme.primary),
-        shape: RoundedRectangleBorder(
-          borderRadius: borderRadius ?? BorderRadius.zero,
-        ),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Text(labelText),
       ),
     );
   }
