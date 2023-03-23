@@ -5,7 +5,6 @@ import 'package:flutter/services.dart';
 class MyTextFormField extends StatelessWidget {
   const MyTextFormField({
     super.key,
-    required this.controller,
     required this.labelText,
     required this.prefixIcon,
     required this.onChanged,
@@ -14,8 +13,6 @@ class MyTextFormField extends StatelessWidget {
     this.isCurrency = false,
     required this.isValid,
   });
-
-  final TextEditingController controller;
 
   final IconData prefixIcon;
   final String labelText;

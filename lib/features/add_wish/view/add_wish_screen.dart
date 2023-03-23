@@ -23,7 +23,6 @@ class AddWishScreen extends StatelessWidget {
               BlocBuilder<AddWishBloc, AddWishState>(
                 builder: (context, state) {
                   return MyTextFormField(
-                    controller: TextEditingController.fromValue(TextEditingValue(text: state.newWish.name)),
                     labelText: 'Nama Tabungan',
                     prefixIcon: Icons.notes,
                     onChanged: (value) {
@@ -45,7 +44,6 @@ class AddWishScreen extends StatelessWidget {
               BlocBuilder<AddWishBloc, AddWishState>(
                 builder: (context, state) {
                   return MyTextFormField(
-                    controller: TextEditingController.fromValue(TextEditingValue(text: state.newWish.savingTarget.toString())),
                     labelText: 'Target Tabungan',
                     prefixIcon: Icons.money,
                     prefixText: 'Rp.',
@@ -98,7 +96,6 @@ class AddWishScreen extends StatelessWidget {
               BlocBuilder<AddWishBloc, AddWishState>(
                 builder: (context, state) {
                   return MyTextFormField(
-                    controller: TextEditingController.fromValue(TextEditingValue(text: state.newWish.savingNominal.toString())),
                     labelText: 'Nominal Pengisian',
                     prefixIcon: Icons.money,
                     prefixText: 'Rp.',
