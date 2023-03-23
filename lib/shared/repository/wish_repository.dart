@@ -17,15 +17,15 @@ class WishRepository extends Equatable {
   }
 
   Future<void> saveWish(Wish wish) async {
-    _wishApi.saveWish(wish);
+    await _wishApi.saveWish(wish);
   }
 
   Future<void> deleteWish(String id) async {
-    _wishApi.deleteWish(id);
+    await _wishApi.deleteWish(id);
   }
 
   Future<void> addSaving(String id, Saving saving) async {
-    _wishApi.addSaving(id, saving);
+    await _wishApi.addSaving(id, saving);
   }
 
   @override

@@ -35,6 +35,7 @@ class Wish extends Equatable {
   final String? imagePath;
 
   Wish copyWith({
+    String? id,
     String? name,
     int? savingTarget,
     SavingPlan? savingPlan,
@@ -45,7 +46,7 @@ class Wish extends Equatable {
     String? imagePath,
   }) {
     return Wish(
-      id: id,
+      id: id ?? this.id,
       name: name ?? this.name,
       savingTarget: savingTarget ?? this.savingTarget,
       savingPlan: savingPlan ?? this.savingPlan,
