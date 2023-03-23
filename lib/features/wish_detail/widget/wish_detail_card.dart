@@ -74,7 +74,7 @@ class _WishTargetInfo extends StatelessWidget {
             Transform.scale(
               scale: 1.2,
               child: CircularProgressIndicator.adaptive(
-                value: wish.getSavingPercentage() / 10,
+                value: wish.getSavingPercentage() / 100,
                 backgroundColor: theme.primaryColorLight,
               ),
             ),
