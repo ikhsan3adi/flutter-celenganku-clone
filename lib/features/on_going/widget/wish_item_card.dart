@@ -94,7 +94,7 @@ class WishItemCard extends StatelessWidget {
                 splashColor: theme.colorScheme.primary.withOpacity(0.2),
                 borderRadius: BorderRadius.circular(15),
                 onTap: () {
-                  Navigator.push(context, WishDetailPage.route(wish: wish));
+                  Navigator.push(context, WishDetailPage.route(wish: wish, context: context));
                 },
               ),
             ),

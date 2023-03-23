@@ -6,10 +6,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class WishDetailPage extends StatelessWidget {
   const WishDetailPage({super.key, required this.wish});
 
-  static Route<void> route({required Wish wish}) {
+  static Route<void> route({required Wish wish, required BuildContext context}) {
     return MaterialPageRoute<void>(
       settings: const RouteSettings(name: '/wish_detail'),
-      builder: (_) => WishDetailPage(wish: wish),
+      builder: (_) => BlocProvider.value(
+        value: context.read<OnGoingBloc>(),
+        child: WishDetailPage(wish: wish),
+      ),
     );
   }
 
@@ -19,8 +22,10 @@ class WishDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     WishRepository wishRepository = context.read<WishRepository>();
 
+    Saving saving = Saving(savingNominal: 0, createdAt: DateTime(2023), message: '');
+
     return BlocProvider(
-      create: (context) => WishBloc(wish: wish, wishRepository: wishRepository),
+      create: (context) => WishBloc(wish: wish, wishRepository: wishRepository, saving: saving),
       child: const WishDetailScreen(),
     );
   }
