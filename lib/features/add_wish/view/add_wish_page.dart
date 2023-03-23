@@ -6,10 +6,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class AddWishPage extends StatelessWidget {
   const AddWishPage({super.key});
 
-  static Route<void> route() {
+  static Route<void> route({required BuildContext context}) {
     return MaterialPageRoute<void>(
       settings: const RouteSettings(name: '/add_wish'),
-      builder: (_) => const AddWishPage(),
+      builder: (_) => BlocProvider.value(
+        value: context.read<OnGoingBloc>(),
+        child: const AddWishPage(),
+      ),
     );
   }
 

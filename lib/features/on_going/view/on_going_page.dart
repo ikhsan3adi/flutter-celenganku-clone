@@ -8,27 +8,36 @@ class OnGoingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) {
+        return OnGoingBloc(wishRepository: context.read<WishRepository>())..add(FetchWishEvent());
+      },
+      child: const Scaffold(
+        body: OnGoingScreen(),
+        floatingActionButton: _FloatingActionButton(),
+      ),
+    );
+  }
+}
+
+class _FloatingActionButton extends StatelessWidget {
+  const _FloatingActionButton();
+
+  @override
+  Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
-    return Scaffold(
-      body: BlocProvider(
-        create: (context) {
-          return OnGoingBloc(wishRepository: context.read<WishRepository>())..add(FetchWishEvent());
-        },
-        child: const OnGoingScreen(),
+    return ElevatedButton.icon(
+      onPressed: () {
+        Navigator.push(context, AddWishPage.route(context: context));
+      },
+      style: ElevatedButton.styleFrom(
+        backgroundColor: theme.colorScheme.primary,
+        foregroundColor: theme.colorScheme.onPrimary,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+        padding: const EdgeInsets.all(16),
       ),
-      floatingActionButton: ElevatedButton.icon(
-        onPressed: () {
-          Navigator.push(context, AddWishPage.route());
-        },
-        style: ElevatedButton.styleFrom(
-          backgroundColor: theme.colorScheme.primary,
-          foregroundColor: theme.colorScheme.onPrimary,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-          padding: const EdgeInsets.all(16),
-        ),
-        icon: const Icon(Icons.add),
-        label: const Text("Tambah Celengan", style: TextStyle(fontWeight: FontWeight.bold)),
-      ),
+      icon: const Icon(Icons.add),
+      label: const Text("Tambah Celengan", style: TextStyle(fontWeight: FontWeight.bold)),
     );
   }
 }
