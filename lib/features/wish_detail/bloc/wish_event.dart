@@ -7,22 +7,45 @@ abstract class WishEvent extends Equatable {
   List<Object> get props => [];
 }
 
-class AddSavingEvent extends WishEvent {
-  const AddSavingEvent({required this.saving});
+class SavingNominalChanged extends WishEvent {
+  SavingNominalChanged({required dynamic value}) {
+    if ((value as String).isNotEmpty) {
+      savingNominal = int.parse((value).replaceAll('.', ''));
+      return;
+    }
+    savingNominal = 0;
+  }
 
-  final Saving saving;
+  late final int savingNominal;
 
   @override
-  List<Object> get props => [saving];
+  List<Object> get props => [savingNominal];
+}
+
+class SavingMessageChanged extends WishEvent {
+  const SavingMessageChanged({required this.message});
+
+  final String message;
+
+  @override
+  List<Object> get props => [message];
+}
+
+class SavingNominalValidation extends WishEvent {
+  const SavingNominalValidation({required this.isSavingNominalValid});
+
+  final bool isSavingNominalValid;
+
+  @override
+  List<Object> get props => [isSavingNominalValid];
+}
+
+class AddSavingEvent extends WishEvent {
+  const AddSavingEvent();
 }
 
 class TakeSavingEvent extends WishEvent {
-  const TakeSavingEvent({required this.saving});
-
-  final Saving saving;
-
-  @override
-  List<Object> get props => [saving];
+  const TakeSavingEvent();
 }
 
 class DeleteWishEvent extends WishEvent {}
