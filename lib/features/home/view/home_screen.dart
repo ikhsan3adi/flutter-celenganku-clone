@@ -93,19 +93,19 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
                     RadioListTile(
                       value: ThemeMode.system,
                       groupValue: state.themeMode,
-                      onChanged: (value) => context.read<AppThemeCubit>().themeChanged(value!),
+                      onChanged: (value) => Future(() => context.read<AppThemeCubit>().themeChanged(value!)).then((_) => Navigator.pop(context)),
                       title: const Text("Default"),
                     ),
                     RadioListTile(
                       value: ThemeMode.light,
                       groupValue: state.themeMode,
-                      onChanged: (value) => context.read<AppThemeCubit>().themeChanged(value!),
+                      onChanged: (value) => Future(() => context.read<AppThemeCubit>().themeChanged(value!)).then((_) => Navigator.pop(context)),
                       title: const Text("Terang"),
                     ),
                     RadioListTile(
                       value: ThemeMode.dark,
                       groupValue: state.themeMode,
-                      onChanged: (value) => context.read<AppThemeCubit>().themeChanged(value!),
+                      onChanged: (value) => Future(() => context.read<AppThemeCubit>().themeChanged(value!)).then((_) => Navigator.pop(context)),
                       title: const Text("Gelap"),
                     ),
                   ],
