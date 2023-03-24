@@ -9,7 +9,7 @@ class AchievedPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => AchievedBloc(wishRepository: context.read<WishRepository>()),
+      create: (context) => AchievedBloc(wishRepository: context.read<WishRepository>())..add(FetchAchievedWishEvent()),
       child: const AchievedScreen(),
     );
   }

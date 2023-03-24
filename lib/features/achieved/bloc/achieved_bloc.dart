@@ -9,7 +9,12 @@ class AchievedBloc extends Bloc<AchievedEvent, AchievedState> {
   AchievedBloc({required WishRepository wishRepository})
       : _wishRepository = wishRepository,
         super(const AchievedState()) {
-    on<AchievedEvent>((event, emit) {});
+    on<FetchAchievedWishEvent>(_fetchWishList);
   }
+
   final WishRepository _wishRepository;
+
+  Future<void> _fetchWishList(FetchAchievedWishEvent event, Emitter<AchievedState> emit) async {
+    emit(AchievedState(wishList: _wishRepository.getAchievedWishList()));
+  }
 }

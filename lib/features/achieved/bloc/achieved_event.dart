@@ -6,3 +6,5 @@ abstract class AchievedEvent extends Equatable {
   @override
   List<Object> get props => [];
 }
+
+class FetchAchievedWishEvent extends AchievedEvent {}
