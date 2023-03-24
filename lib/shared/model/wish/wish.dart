@@ -89,6 +89,7 @@ class Wish extends Equatable {
   @override
   List<Object?> get props {
     return [
+      id,
       name,
       savingTarget,
       savingPlan,
@@ -96,6 +97,7 @@ class Wish extends Equatable {
       listSaving,
       createdAt,
       completedAt,
+      imagePath,
     ];
   }
 }
