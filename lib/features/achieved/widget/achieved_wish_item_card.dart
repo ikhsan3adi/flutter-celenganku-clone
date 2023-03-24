@@ -60,7 +60,7 @@ class AchievedWishItemCard extends StatelessWidget {
                   const Divider(),
                   Center(
                     child: Text(
-                      "Tercapai Dalam Waktu ${_getDifference(wish.completedAt!.difference(wish.createdAt))} ${Wish.savingPlanTimeName(wish.savingPlan).toLowerCase()}",
+                      "Tercapai Dalam Waktu ${wish.durationToAchieve()} ${Wish.savingPlanTimeName(wish.savingPlan)}",
                       style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                     ),
                   )
@@ -81,16 +81,5 @@ class AchievedWishItemCard extends StatelessWidget {
         ],
       ),
     );
-  }
-
-  int _getDifference(Duration duration) {
-    switch (wish.savingPlan) {
-      case SavingPlan.daily:
-        return duration.inDays;
-      case SavingPlan.weekly:
-        return duration.inWeek;
-      case SavingPlan.monthly:
-        return duration.inMonth;
-    }
   }
 }
