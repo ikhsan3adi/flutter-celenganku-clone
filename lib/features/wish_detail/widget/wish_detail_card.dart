@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:celenganku_app_clone/features/wish_detail/wish_detail.dart';
 import 'package:celenganku_app_clone/shared/shared.dart';
 import 'package:flutter/material.dart';
@@ -8,21 +10,39 @@ class WishDetailCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ThemeData theme = Theme.of(context);
     return Card(
       margin: EdgeInsets.zero,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       child: BlocBuilder<WishBloc, WishState>(
         builder: (context, state) {
+          final imagePath = state.wish.imagePath;
+
           return Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               AspectRatio(
                 aspectRatio: 16 / 9,
                 child: Container(
-                  decoration: const BoxDecoration(
-                    color: Colors.black,
-                    borderRadius: BorderRadius.vertical(top: Radius.circular(10)),
+                  decoration: BoxDecoration(
+                    color: imagePath != null ? null : theme.colorScheme.primary,
+                    image: imagePath != null
+                        ? DecorationImage(
+                            image: FileImage(File(imagePath)),
+                            fit: BoxFit.cover,
+                          )
+                        : null,
+                    borderRadius: const BorderRadius.vertical(top: Radius.circular(10)),
                   ),
+                  child: imagePath != null
+                      ? null
+                      : Center(
+                          child: Icon(
+                            Icons.landscape_outlined,
+                            size: 100,
+                            color: theme.colorScheme.onPrimary,
+                          ),
+                        ),
                 ),
               ),
               Padding(

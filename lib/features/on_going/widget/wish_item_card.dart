@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:celenganku_app_clone/features/features.dart';
 import 'package:celenganku_app_clone/shared/shared.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +12,8 @@ class WishItemCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
+
+    final imagePath = wish.imagePath;
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 16),
       child: Stack(
@@ -32,9 +36,24 @@ class WishItemCard extends StatelessWidget {
                       aspectRatio: 16 / 9,
                       child: Container(
                         decoration: BoxDecoration(
-                          color: Colors.black,
+                          color: imagePath != null ? null : theme.colorScheme.primary,
+                          image: imagePath != null
+                              ? DecorationImage(
+                                  image: FileImage(File(imagePath)),
+                                  fit: BoxFit.cover,
+                                )
+                              : null,
                           borderRadius: BorderRadius.circular(10),
                         ),
+                        child: imagePath != null
+                            ? null
+                            : Center(
+                                child: Icon(
+                                  Icons.landscape_outlined,
+                                  size: 100,
+                                  color: theme.colorScheme.onPrimary,
+                                ),
+                              ),
                       ),
                     ),
                   ),
