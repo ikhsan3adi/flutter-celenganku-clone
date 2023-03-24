@@ -117,7 +117,7 @@ class WishItemCard extends StatelessWidget {
                 },
               ),
             ),
-          )
+          ),
         ],
       ),
     );
