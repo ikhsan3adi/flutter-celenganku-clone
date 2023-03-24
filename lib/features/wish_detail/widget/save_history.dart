@@ -28,54 +28,12 @@ class SaveHistory extends StatelessWidget {
               itemBuilder: (context, index) {
                 Saving saving = state.wish.listSaving[index];
 
-                return _SavingListItem(saving: saving);
+                return SavingListItem(saving: saving);
               },
             ),
           ),
         );
       },
-    );
-  }
-}
-
-class _SavingListItem extends StatelessWidget {
-  const _SavingListItem({required this.saving});
-
-  final Saving saving;
-
-  @override
-  Widget build(BuildContext context) {
-    bool isNegative = saving.savingNominal <= 0;
-    return Column(
-      children: [
-        const SizedBox(height: 10),
-        ListTile(
-          contentPadding: EdgeInsets.zero,
-          leading: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "${saving.createdAt.toFormattedDateString()} • ${saving.createdAt.toFormattedTimeString()}", // date
-                style: const TextStyle(fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 5),
-              Text(saving.message), // message
-            ],
-          ),
-          trailing: Padding(
-            padding: const EdgeInsets.only(top: 8.0),
-            child: Text(
-              "${isNegative ? '' : '+'} ${saving.savingNominal.toCurrency()}", // saving nominal
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 18,
-                color: isNegative ? Colors.red : Colors.green,
-              ),
-            ),
-          ),
-        ),
-        const Divider(height: 1),
-      ],
     );
   }
 }
