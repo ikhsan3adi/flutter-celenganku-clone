@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:celenganku_app_clone/shared/shared.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:uuid/uuid.dart';
 
 part 'add_wish_event.dart';
 part 'add_wish_state.dart';
@@ -53,7 +54,7 @@ class AddWishBloc extends Bloc<AddWishEvent, AddWishState> {
 
   void _saveWish(SaveWishEvent event, Emitter<AddWishState> emit) async {
     Wish newWish = state.newWish.copyWith(
-      id: Random.secure().nextInt(1000).toStringAsExponential(), // will replace by uuid
+      id: const Uuid().v4(),
       createdAt: DateTime.now(),
     );
 
