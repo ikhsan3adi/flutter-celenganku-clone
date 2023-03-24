@@ -24,35 +24,35 @@ class AddWishBloc extends Bloc<AddWishEvent, AddWishState> {
 
   final WishRepository _wishRepository;
 
-  Future<void> _wishNameChanged(WishNameChanged event, Emitter<AddWishState> emit) async {
+  void _wishNameChanged(WishNameChanged event, Emitter<AddWishState> emit) {
     emit(state.copyWith(newWish: state.newWish.copyWith(name: event.wishName)));
   }
 
-  Future<void> _wishSavingTargetChanged(WishSavingTargetChanged event, Emitter<AddWishState> emit) async {
+  void _wishSavingTargetChanged(WishSavingTargetChanged event, Emitter<AddWishState> emit) {
     emit(state.copyWith(newWish: state.newWish.copyWith(savingTarget: event.savingTarget)));
   }
 
-  Future<void> _wishSavingPlanChanged(WishSavingPlanChanged event, Emitter<AddWishState> emit) async {
+  void _wishSavingPlanChanged(WishSavingPlanChanged event, Emitter<AddWishState> emit) {
     emit(state.copyWith(newWish: state.newWish.copyWith(savingPlan: event.savingPlan)));
   }
 
-  Future<void> _wishSavingNominalChanged(WishSavingNominalChanged event, Emitter<AddWishState> emit) async {
+  void _wishSavingNominalChanged(WishSavingNominalChanged event, Emitter<AddWishState> emit) {
     emit(state.copyWith(newWish: state.newWish.copyWith(savingNominal: event.savingNominal)));
   }
 
-  Future<void> _nameValidation(WishNameValidation event, Emitter<AddWishState> emit) async {
+  void _nameValidation(WishNameValidation event, Emitter<AddWishState> emit) {
     emit(state.copyWith(isNameValid: event.isNameValid));
   }
 
-  Future<void> _wishTargetValidation(WishTargetValidation event, Emitter<AddWishState> emit) async {
+  void _wishTargetValidation(WishTargetValidation event, Emitter<AddWishState> emit) {
     emit(state.copyWith(isSavingTargetValid: event.isSavingTargetValid));
   }
 
-  Future<void> _wishNominalValidation(WishNominalValidation event, Emitter<AddWishState> emit) async {
+  void _wishNominalValidation(WishNominalValidation event, Emitter<AddWishState> emit) {
     emit(state.copyWith(isSavingNominalValid: event.isSavingNominalValid));
   }
 
-  void _saveWish(SaveWishEvent event, Emitter<AddWishState> emit) async {
+  Future<void> _saveWish(SaveWishEvent event, Emitter<AddWishState> emit) async {
     Wish newWish = state.newWish.copyWith(
       id: const Uuid().v4(),
       createdAt: DateTime.now(),
