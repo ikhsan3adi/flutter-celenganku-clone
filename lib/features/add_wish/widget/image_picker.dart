@@ -9,6 +9,18 @@ import 'package:image_picker/image_picker.dart' as picker;
 class ImagePicker extends StatelessWidget {
   const ImagePicker({super.key});
 
+  /// Get from camera
+  Future<String?> _getFromCamera() async {
+    picker.ImagePicker imagePicker = picker.ImagePicker();
+
+    picker.XFile? image = await imagePicker.pickImage(source: picker.ImageSource.camera);
+
+    if (image != null) {
+      return await _cropImage(filePath: image.path);
+    }
+    return null;
+  }
+
   /// Get from gallery
   Future<String?> _getFromGallery() async {
     picker.ImagePicker imagePicker = picker.ImagePicker();
@@ -64,13 +76,11 @@ class ImagePicker extends StatelessWidget {
                   child: InkWell(
                     borderRadius: BorderRadius.circular(10),
                     onTap: () async {
-                      String? path = await _getFromGallery();
-
-                      if (path == null) return;
-
-                      if (context.mounted) {
-                        context.read<AddWishBloc>().add(WishImageChanged(imagePath: path));
-                      }
+                      await showModalBottomSheet<void>(
+                        context: context,
+                        shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(25))),
+                        builder: (_) => _selectImageSourceModal(context),
+                      );
                     },
                     child: imagePath != null
                         ? null
@@ -87,6 +97,59 @@ class ImagePicker extends StatelessWidget {
             );
           },
         ),
+      ),
+    );
+  }
+
+  Widget _selectImageSourceModal(BuildContext context) {
+    ThemeData theme = Theme.of(context);
+    return SingleChildScrollView(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const Padding(
+            padding: EdgeInsets.symmetric(vertical: 16),
+            child: Text("Pilih Sumber Gambar", style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+          ),
+          ListTile(
+            contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+            leading: CircleAvatar(
+              backgroundColor: theme.colorScheme.primary,
+              foregroundColor: theme.colorScheme.onPrimary,
+              child: const Icon(Icons.camera_alt_outlined),
+            ),
+            title: const Text("Kamera", style: TextStyle(fontWeight: FontWeight.bold)),
+            onTap: () async {
+              String? path = await _getFromCamera();
+
+              if (path == null) return;
+
+              if (context.mounted) {
+                context.read<AddWishBloc>().add(WishImageChanged(imagePath: path));
+                Navigator.pop(context);
+              }
+            },
+          ),
+          ListTile(
+            contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+            leading: CircleAvatar(
+              backgroundColor: theme.colorScheme.primary,
+              foregroundColor: theme.colorScheme.onPrimary,
+              child: const Icon(Icons.photo_library_outlined),
+            ),
+            title: const Text("Gallery", style: TextStyle(fontWeight: FontWeight.bold)),
+            onTap: () async {
+              String? path = await _getFromGallery();
+
+              if (path == null) return;
+
+              if (context.mounted) {
+                context.read<AddWishBloc>().add(WishImageChanged(imagePath: path));
+                Navigator.pop(context);
+              }
+            },
+          ),
+        ],
       ),
     );
   }
