@@ -82,8 +82,7 @@ class SavingFormDialog extends StatelessWidget {
         TextButton(
           onPressed: () {
             if (formKey.currentState!.validate()) {
-              onSubmit.call();
-              context.read<OnGoingBloc>().add(FetchWishEvent());
+              Future(() => onSubmit.call()).then((_) => context.read<OnGoingBloc>().add(FetchWishEvent()));
               Navigator.pop(context);
             }
           },
