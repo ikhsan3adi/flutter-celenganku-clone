@@ -15,9 +15,9 @@ class AchievedScreen extends StatelessWidget {
           shrinkWrap: true,
           itemCount: state.wishList.length,
           itemBuilder: (context, index) {
-            return const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16),
-              child: AchievedWishItemCard(),
+            return Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: AchievedWishItemCard(wish: state.wishList[index]),
             );
           },
         );
