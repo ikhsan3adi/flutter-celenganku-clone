@@ -45,9 +45,9 @@ class WishItemCard extends StatelessWidget {
                         Expanded(
                           child: Column(
                             children: [
-                              Text("Rp. ${wish.savingTarget}", style: const TextStyle(fontSize: 24)),
+                              Text("Rp. ${wish.savingTarget.toCurrency()}", style: const TextStyle(fontSize: 24)),
                               Text(
-                                "Rp. ${wish.savingNominal}  Per${Wish.savingPlanTimeName(wish.savingPlan).toLowerCase()}",
+                                "Rp. ${wish.savingNominal.toCurrency()}  Per${Wish.savingPlanTimeName(wish.savingPlan).toLowerCase()}",
                                 style: const TextStyle(fontWeight: FontWeight.bold),
                               ),
                             ],

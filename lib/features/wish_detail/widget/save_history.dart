@@ -55,7 +55,7 @@ class _SavingListItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                saving.createdAt.toString(), // date
+                "${saving.createdAt.toFormattedDateString()} • ${saving.createdAt.toFormattedTimeString()}", // date
                 style: const TextStyle(fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 5),
@@ -65,7 +65,7 @@ class _SavingListItem extends StatelessWidget {
           trailing: Padding(
             padding: const EdgeInsets.only(top: 8.0),
             child: Text(
-              "${isNegative ? '' : '+'} ${saving.savingNominal.toString()}", // saving nominal
+              "${isNegative ? '' : '+'} ${saving.savingNominal.toCurrency()}", // saving nominal
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 18,

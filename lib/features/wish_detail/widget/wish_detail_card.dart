@@ -1,5 +1,5 @@
 import 'package:celenganku_app_clone/features/wish_detail/wish_detail.dart';
-import 'package:celenganku_app_clone/shared/model/model.dart';
+import 'package:celenganku_app_clone/shared/shared.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -59,10 +59,10 @@ class _WishTargetInfo extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("Rp. ${wish.savingTarget}", style: const TextStyle(fontSize: 28)),
+              Text("Rp. ${wish.savingTarget.toCurrency()}", style: const TextStyle(fontSize: 28)),
               const SizedBox(height: 5),
               Text(
-                "Rp. ${wish.savingNominal} Per${Wish.savingPlanTimeName(wish.savingPlan).toLowerCase()}",
+                "Rp. ${wish.savingNominal.toCurrency()} Per${Wish.savingPlanTimeName(wish.savingPlan).toLowerCase()}",
                 style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
               ),
             ],
@@ -100,7 +100,7 @@ class _WishTimeInfo extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             const Text("Dibuat", style: TextStyle(fontWeight: FontWeight.bold)),
-            Text(wish.createdAt.toString(), style: const TextStyle(fontWeight: FontWeight.bold)),
+            Text(wish.createdAt.toFormattedDateString(useShortMonthName: true), style: const TextStyle(fontWeight: FontWeight.bold)),
           ],
         ),
         const SizedBox(height: 10),
@@ -135,7 +135,7 @@ class _WishSavingInfo extends StatelessWidget {
               const Text("Terkumpul", style: TextStyle(fontWeight: FontWeight.bold)),
               const SizedBox(height: 5),
               Text(
-                "Rp. ${wish.getTotalSaving()}",
+                "Rp. ${wish.getTotalSaving().toCurrency()}",
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 18,
@@ -153,7 +153,7 @@ class _WishSavingInfo extends StatelessWidget {
               const Text("Kurang", style: TextStyle(fontWeight: FontWeight.bold)),
               const SizedBox(height: 5),
               Text(
-                "Rp. ${wish.savingTarget - wish.getTotalSaving()}",
+                "Rp. ${(wish.savingTarget - wish.getTotalSaving()).toCurrency()}",
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 18,
