@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:celenganku_app_clone/features/achieved/achieved.dart';
+import 'package:celenganku_app_clone/features/achieved_detail/achieved_detail.dart';
 import 'package:celenganku_app_clone/shared/shared.dart';
 import 'package:flutter/material.dart';
 
@@ -74,7 +76,9 @@ class AchievedWishItemCard extends StatelessWidget {
               child: InkWell(
                 splashColor: theme.colorScheme.primary.withOpacity(0.2),
                 borderRadius: BorderRadius.circular(15),
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(context, AchievedDetailPage.route(wish: wish, context: context));
+                },
               ),
             ),
           ),
