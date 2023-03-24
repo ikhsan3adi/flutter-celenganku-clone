@@ -12,6 +12,7 @@ class AddWishBloc extends Bloc<AddWishEvent, AddWishState> {
   AddWishBloc({required WishRepository wishRepository, required Wish newWish})
       : _wishRepository = wishRepository,
         super(AddWishState(newWish: newWish)) {
+    on<WishImageChanged>(_wishImageChanged);
     on<WishNameChanged>(_wishNameChanged);
     on<WishSavingTargetChanged>(_wishSavingTargetChanged);
     on<WishSavingPlanChanged>(_wishSavingPlanChanged);
@@ -23,6 +24,10 @@ class AddWishBloc extends Bloc<AddWishEvent, AddWishState> {
   }
 
   final WishRepository _wishRepository;
+
+  void _wishImageChanged(WishImageChanged event, Emitter<AddWishState> emit) {
+    emit(state.copyWith(newWish: state.newWish.copyWith(imagePath: event.imagePath)));
+  }
 
   void _wishNameChanged(WishNameChanged event, Emitter<AddWishState> emit) {
     emit(state.copyWith(newWish: state.newWish.copyWith(name: event.wishName)));

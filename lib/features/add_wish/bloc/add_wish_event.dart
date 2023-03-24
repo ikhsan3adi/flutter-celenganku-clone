@@ -7,6 +7,15 @@ abstract class AddWishEvent extends Equatable {
   List<Object> get props => [];
 }
 
+class WishImageChanged extends AddWishEvent {
+  const WishImageChanged({required this.imagePath});
+
+  final String imagePath;
+
+  @override
+  List<Object> get props => [imagePath];
+}
+
 class WishNameChanged extends AddWishEvent {
   const WishNameChanged({required this.wishName});
 
