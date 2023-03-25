@@ -7,7 +7,7 @@ class WishRepository extends Equatable {
   final WishApi _wishApi;
 
   List<Wish> getOnGoingWishList() {
-    return _wishApi.getWishList().where((e) => e.completedAt == null).toList();
+    return _wishApi.getWishList().where((e) => e.completedAt == null).toList()..sort((a, b) => b.createdAt.compareTo(a.createdAt));
   }
 
   List<Wish> getAchievedWishList() {
