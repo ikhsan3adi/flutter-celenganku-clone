@@ -13,7 +13,7 @@ class WishRepository extends Equatable {
   }
 
   List<Wish> getAchievedWishList() {
-    return _wishApi.getWishList().where((e) => e.completedAt != null).toList();
+    return _wishApi.getWishList().where((e) => e.completedAt != null).toList()..sort((a, b) => b.completedAt!.compareTo(a.completedAt!));
   }
 
   Future<void> saveWish(Wish wish) async {
