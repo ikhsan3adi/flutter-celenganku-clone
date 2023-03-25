@@ -1,11 +1,21 @@
 import 'package:celenganku_app_clone/shared/shared.dart';
 import 'package:equatable/equatable.dart';
+import 'package:hive/hive.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'wish.g.dart';
 
-enum SavingPlan { daily, weekly, monthly }
+@HiveType(typeId: 1)
+enum SavingPlan {
+  @HiveField(0)
+  daily,
+  @HiveField(1)
+  weekly,
+  @HiveField(2)
+  monthly,
+}
 
+@HiveType(typeId: 0)
 @JsonSerializable()
 class Wish extends Equatable {
   const Wish({
@@ -20,18 +30,23 @@ class Wish extends Equatable {
     this.imagePath,
   });
 
+  @HiveField(0)
   final String id;
-
+  @HiveField(1)
   final String name;
+  @HiveField(2)
   final int savingTarget;
+  @HiveField(3)
   final SavingPlan savingPlan;
+  @HiveField(4)
   final int savingNominal;
-
+  @HiveField(5)
   final List<Saving> listSaving;
-
+  @HiveField(6)
   final DateTime createdAt;
+  @HiveField(7)
   final DateTime? completedAt;
-
+  @HiveField(8)
   final String? imagePath;
 
   Wish copyWith({

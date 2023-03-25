@@ -1,8 +1,10 @@
 import 'package:equatable/equatable.dart';
+import 'package:hive/hive.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'saving.g.dart';
 
+@HiveType(typeId: 2)
 @JsonSerializable()
 class Saving extends Equatable {
   const Saving({
@@ -11,8 +13,11 @@ class Saving extends Equatable {
     required this.message,
   });
 
+  @HiveField(0)
   final int savingNominal;
+  @HiveField(1)
   final DateTime createdAt;
+  @HiveField(2)
   final String message;
 
   Saving copyWith({

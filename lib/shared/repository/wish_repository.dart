@@ -1,5 +1,3 @@
-// ignore_for_file: unused_field
-
 import 'package:celenganku_app_clone/shared/shared.dart';
 import 'package:equatable/equatable.dart';
 
