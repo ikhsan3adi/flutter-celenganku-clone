@@ -19,15 +19,15 @@ class WishBloc extends Bloc<WishEvent, WishState> {
 
   final WishRepository _wishRepository;
 
-  void _savingNominalChanged(SavingNominalChanged event, Emitter<WishState> emit)  {
+  void _savingNominalChanged(SavingNominalChanged event, Emitter<WishState> emit) {
     emit(state.copyWith(newSaving: state.newSaving.copyWith(savingNominal: event.savingNominal)));
   }
 
-  void _savingMessageChanged(SavingMessageChanged event, Emitter<WishState> emit)  {
+  void _savingMessageChanged(SavingMessageChanged event, Emitter<WishState> emit) {
     emit(state.copyWith(newSaving: state.newSaving.copyWith(message: event.message)));
   }
 
-  void _savingNominalValidation(SavingNominalValidation event, Emitter<WishState> emit)  {
+  void _savingNominalValidation(SavingNominalValidation event, Emitter<WishState> emit) {
     emit(state.copyWith(isSavingNominalValid: event.isSavingNominalValid));
   }
 
@@ -38,9 +38,23 @@ class WishBloc extends Bloc<WishEvent, WishState> {
       listSaving: [...state.wish.listSaving, newSaving],
     );
 
-    await _wishRepository.saveWish(updatedWish);
+    if (updatedWish.getTotalSaving() >= updatedWish.savingTarget) {
+      Wish completedWish = state.wish.copyWith(completedAt: DateTime.now());
 
-    emit(state.copyWith(wish: updatedWish));
+      emit(state.copyWith(
+        wish: completedWish,
+        isSavingNominalValid: true,
+      ));
+
+      await _wishRepository.saveWish(completedWish);
+    } else {
+      emit(state.copyWith(
+        wish: updatedWish,
+        isSavingNominalValid: true,
+      ));
+
+      await _wishRepository.saveWish(updatedWish);
+    }
   }
 
   Future<void> _takeSaving(TakeSavingEvent event, Emitter<WishState> emit) async {
