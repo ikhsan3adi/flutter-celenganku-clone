@@ -12,6 +12,6 @@ class AchievedDetailCubit extends Cubit<AchievedDetailState> {
   final WishRepository _wishRepository;
 
   Future<void> deleteAchievedWish() async {
-    await _wishRepository.deleteWish(state.wish.id);
+    await _wishRepository.deleteWish(state.wish);
   }
 }

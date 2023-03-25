@@ -73,6 +73,6 @@ class WishBloc extends Bloc<WishEvent, WishState> {
   }
 
   Future<void> _deleteWish(DeleteWishEvent event, Emitter<WishState> emit) async {
-    await _wishRepository.deleteWish(state.wish.id);
+    await _wishRepository.deleteWish(state.wish);
   }
 }
