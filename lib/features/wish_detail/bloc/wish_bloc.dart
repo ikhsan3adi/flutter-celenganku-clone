@@ -39,7 +39,7 @@ class WishBloc extends Bloc<WishEvent, WishState> {
     );
 
     if (updatedWish.getTotalSaving() >= updatedWish.savingTarget) {
-      Wish completedWish = state.wish.copyWith(completedAt: DateTime.now());
+      Wish completedWish = updatedWish.copyWith(completedAt: DateTime.now());
 
       emit(state.copyWith(
         wish: completedWish,
