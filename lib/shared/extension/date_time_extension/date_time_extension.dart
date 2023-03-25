@@ -15,6 +15,11 @@ extension CustomDateTimeFormat on DateTime {
     return "$hour:$minute";
   }
 
+  /// 20220314_093058
+  String toUrl() {
+    return "$year$month${day}_$hour$minute$second";
+  }
+
   static List<String> monthName = [
     'January',
     'February',
