@@ -56,7 +56,7 @@ class SavingFormDialog extends StatelessWidget {
                         return validator?.call(value);
                       }
 
-                      context.read<WishBloc>().add(const SavingNominalValidation(isSavingNominalValid: false));
+                      context.read<WishBloc>().add(const SavingNominalValidation(isSavingNominalValid: true));
                       return null;
                     },
                     isValid: state.isSavingNominalValid,
@@ -80,10 +80,10 @@ class SavingFormDialog extends StatelessWidget {
           child: const Text('Batal'),
         ),
         TextButton(
-          onPressed: () {
+          onPressed: () async {
             if (formKey.currentState!.validate()) {
-              Future(() => onSubmit.call()).then((_) => context.read<OnGoingBloc>().add(FetchWishEvent()));
-              Navigator.pop(context);
+              await Future(() => onSubmit.call()).then((_) => context.read<OnGoingBloc>().add(FetchWishEvent()));
+              if (context.mounted) Navigator.pop(context);
             }
           },
           child: const Text('Simpan'),
