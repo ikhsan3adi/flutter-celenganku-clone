@@ -14,3 +14,7 @@ class OnGoingState extends Equatable {
 }
 
 class OnGoingLoadingState extends OnGoingState {}
+
+class OnGoingLoadedState extends OnGoingState {
+  const OnGoingLoadedState({super.wishList});
+}

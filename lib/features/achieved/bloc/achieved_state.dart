@@ -14,3 +14,7 @@ class AchievedState extends Equatable {
 }
 
 class AchievedLoadingState extends AchievedState {}
+
+class AchievedLoadedState extends AchievedState {
+  const AchievedLoadedState({super.wishList});
+}

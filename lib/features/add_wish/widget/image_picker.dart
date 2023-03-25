@@ -102,23 +102,20 @@ class ImagePicker extends StatelessWidget {
   }
 
   Widget _selectImageSourceModal(BuildContext context) {
-    ThemeData theme = Theme.of(context);
     return SingleChildScrollView(
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           const Padding(
             padding: EdgeInsets.symmetric(vertical: 16),
-            child: Text("Pilih Sumber Gambar", style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
-          ),
-          ListTile(
-            contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-            leading: CircleAvatar(
-              backgroundColor: theme.colorScheme.primary,
-              foregroundColor: theme.colorScheme.onPrimary,
-              child: const Icon(Icons.camera_alt_outlined),
+            child: Text(
+              "Pilih Sumber Gambar",
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
-            title: const Text("Kamera", style: TextStyle(fontWeight: FontWeight.bold)),
+          ),
+          _ImageSourceListTile(
+            titleText: 'Kamera',
+            iconData: Icons.camera_alt_outlined,
             onTap: () async {
               String? path = await _getFromCamera();
 
@@ -130,14 +127,9 @@ class ImagePicker extends StatelessWidget {
               }
             },
           ),
-          ListTile(
-            contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
-            leading: CircleAvatar(
-              backgroundColor: theme.colorScheme.primary,
-              foregroundColor: theme.colorScheme.onPrimary,
-              child: const Icon(Icons.photo_library_outlined),
-            ),
-            title: const Text("Gallery", style: TextStyle(fontWeight: FontWeight.bold)),
+          _ImageSourceListTile(
+            titleText: 'Gallery',
+            iconData: Icons.photo_library_outlined,
             onTap: () async {
               String? path = await _getFromGallery();
 
@@ -151,6 +143,33 @@ class ImagePicker extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class _ImageSourceListTile extends StatelessWidget {
+  const _ImageSourceListTile({
+    required this.titleText,
+    required this.iconData,
+    required this.onTap,
+  });
+
+  final String titleText;
+  final IconData iconData;
+  final VoidCallback onTap;
+
+  @override
+  Widget build(BuildContext context) {
+    ThemeData theme = Theme.of(context);
+    return ListTile(
+      contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
+      leading: CircleAvatar(
+        backgroundColor: theme.colorScheme.primary,
+        foregroundColor: theme.colorScheme.onPrimary,
+        child: Icon(iconData),
+      ),
+      title: Text(titleText, style: const TextStyle(fontWeight: FontWeight.bold)),
+      onTap: onTap,
     );
   }
 }

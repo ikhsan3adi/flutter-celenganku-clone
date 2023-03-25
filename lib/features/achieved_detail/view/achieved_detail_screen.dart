@@ -38,8 +38,7 @@ class AchievedDetailScreen extends StatelessWidget {
                 ),
               ),
               onPressed: () {
-                Future(() => context.read<AchievedDetailCubit>().deleteAchievedWish())
-                    .then((value) => context.read<AchievedBloc>().add(FetchAchievedWishEvent()));
+                context.read<AchievedDetailCubit>().deleteAchievedWish();
 
                 Navigator.pop(context);
               },

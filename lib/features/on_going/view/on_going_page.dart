@@ -28,7 +28,11 @@ class _FloatingActionButton extends StatelessWidget {
     ThemeData theme = Theme.of(context);
     return ElevatedButton.icon(
       onPressed: () {
-        Navigator.push(context, AddWishPage.route(context: context));
+        Navigator.push(context, AddWishPage.route()).then(
+          (_) {
+            context.read<OnGoingBloc>().add(FetchWishEvent());
+          },
+        );
       },
       style: ElevatedButton.styleFrom(
         backgroundColor: theme.colorScheme.primary,

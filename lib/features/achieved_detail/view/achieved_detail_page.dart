@@ -6,13 +6,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 class AchievedDetailPage extends StatelessWidget {
   const AchievedDetailPage({super.key, required this.wish});
 
-  static Route<void> route({required Wish wish, required BuildContext context}) {
+  static Route<void> route({required Wish wish}) {
     return MaterialPageRoute<void>(
       settings: const RouteSettings(name: '/achieved_detail'),
-      builder: (_) => BlocProvider.value(
-        value: context.read<AchievedBloc>(),
-        child: AchievedDetailPage(wish: wish),
-      ),
+      builder: (context) => AchievedDetailPage(wish: wish),
     );
   }
 

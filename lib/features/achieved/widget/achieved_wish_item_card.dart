@@ -4,6 +4,7 @@ import 'package:celenganku_app_clone/features/achieved/achieved.dart';
 import 'package:celenganku_app_clone/features/achieved_detail/achieved_detail.dart';
 import 'package:celenganku_app_clone/shared/shared.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AchievedWishItemCard extends StatelessWidget {
   const AchievedWishItemCard({super.key, required this.wish});
@@ -77,7 +78,9 @@ class AchievedWishItemCard extends StatelessWidget {
                 splashColor: theme.colorScheme.primary.withOpacity(0.2),
                 borderRadius: BorderRadius.circular(15),
                 onTap: () {
-                  Navigator.push(context, AchievedDetailPage.route(wish: wish, context: context));
+                  Navigator.push(context, AchievedDetailPage.route(wish: wish)).then((_) {
+                    context.read<AchievedBloc>().add(FetchAchievedWishEvent());
+                  });
                 },
               ),
             ),

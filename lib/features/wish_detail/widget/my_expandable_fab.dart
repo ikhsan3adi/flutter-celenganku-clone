@@ -39,11 +39,8 @@ class MyExpandableFab extends StatelessWidget {
             }
             showDialog(
               context: context,
-              builder: (_) => MultiBlocProvider(
-                providers: [
-                  BlocProvider.value(value: context.read<WishBloc>()),
-                  BlocProvider.value(value: context.read<OnGoingBloc>()),
-                ],
+              builder: (_) => BlocProvider.value(
+                value: context.read<WishBloc>(),
                 child: SavingFormDialog(
                   title: 'Ambil Tabungan',
                   onSubmit: () => context.read<WishBloc>().add(const TakeSavingEvent()),
@@ -64,11 +61,8 @@ class MyExpandableFab extends StatelessWidget {
         _FloatingActionButtons(
           onTap: () => showDialog(
             context: context,
-            builder: (_) => MultiBlocProvider(
-              providers: [
-                BlocProvider.value(value: context.read<WishBloc>()),
-                BlocProvider.value(value: context.read<OnGoingBloc>()),
-              ],
+            builder: (_) => BlocProvider.value(
+              value: context.read<WishBloc>(),
               child: SavingFormDialog(
                 title: 'Menabung',
                 onSubmit: () => context.read<WishBloc>().add(const AddSavingEvent()),
@@ -119,7 +113,7 @@ class MyExpandableFab extends StatelessWidget {
         ),
         TextButton(
           onPressed: () {
-            Future(() => context.read<WishBloc>().add(DeleteWishEvent())).then((value) => context.read<OnGoingBloc>().add(FetchWishEvent()));
+            context.read<WishBloc>().add(DeleteWishEvent());
 
             Fluttertoast.showToast(msg: 'Berhasil dihapus');
             Navigator.popUntil(context, (route) => route.isFirst);

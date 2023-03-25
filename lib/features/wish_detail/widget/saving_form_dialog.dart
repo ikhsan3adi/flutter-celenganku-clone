@@ -82,8 +82,9 @@ class SavingFormDialog extends StatelessWidget {
         TextButton(
           onPressed: () async {
             if (formKey.currentState!.validate()) {
-              await Future(() => onSubmit.call()).then((_) => context.read<OnGoingBloc>().add(FetchWishEvent()));
-              if (context.mounted) Navigator.pop(context);
+              onSubmit.call();
+
+              Navigator.pop(context);
             }
           },
           child: const Text('Simpan'),

@@ -62,5 +62,7 @@ class AddWishBloc extends Bloc<AddWishEvent, AddWishState> {
     );
 
     await _wishRepository.saveWish(newWish);
+
+    emit(state.copyWith(newWish: newWish));
   }
 }

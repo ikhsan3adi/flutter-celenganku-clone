@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:celenganku_app_clone/features/features.dart';
 import 'package:celenganku_app_clone/shared/shared.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class WishItemCard extends StatelessWidget {
   const WishItemCard({super.key, required this.wish});
@@ -113,7 +114,9 @@ class WishItemCard extends StatelessWidget {
                 splashColor: theme.colorScheme.primary.withOpacity(0.2),
                 borderRadius: BorderRadius.circular(15),
                 onTap: () {
-                  Navigator.push(context, WishDetailPage.route(wish: wish, context: context));
+                  Navigator.push(context, WishDetailPage.route(wish: wish)).then((_) {
+                    context.read<OnGoingBloc>().add(FetchWishEvent());
+                  });
                 },
               ),
             ),
