@@ -1,0 +1,7 @@
+flutter_icons:
+  android: true
+  ios: true
+  image_path: "assets/launcher_icon/icon.png"
+
+# to generate app launcher icon, run the command below
+# flutter pub run flutter_launcher_icons -f flutter_launcher_icons.yaml
