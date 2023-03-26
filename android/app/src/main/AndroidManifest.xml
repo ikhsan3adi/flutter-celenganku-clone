@@ -1,8 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.celenganku_app_clone">
+    package="com.x4nn.celenganku_app_clone">
    <application
         android:requestLegacyExternalStorage="true"
-        android:label="celenganku_app_clone"
+        android:label="Celenganku"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
