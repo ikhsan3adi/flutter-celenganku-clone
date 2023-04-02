@@ -31,12 +31,12 @@ class WishDetailScreen extends StatelessWidget {
       ),
       body: BlocListener<WishBloc, WishState>(
         bloc: context.read<WishBloc>(),
-        listener: (context, state) {
+        listener: (context, state) async {
           if (state.wish.completedAt != null) {
-            showDialog(
-              context: context,
-              builder: (context) => _wishCompleteDialog(context),
-            );
+            await Future.delayed(const Duration(milliseconds: 500)).then((_) => showDialog(
+                  context: context,
+                  builder: (context) => _wishCompleteDialog(context),
+                ));
           }
         },
         child: Padding(
