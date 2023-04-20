@@ -1,5 +1,4 @@
 import 'package:celenganku_app_clone/features/features.dart';
-import 'package:celenganku_app_clone/shared/repository/repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -8,14 +7,9 @@ class OnGoingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) {
-        return OnGoingBloc(wishRepository: context.read<WishRepository>())..add(FetchWishEvent());
-      },
-      child: const Scaffold(
-        body: OnGoingScreen(),
-        floatingActionButton: _FloatingActionButton(),
-      ),
+    return const Scaffold(
+      body: OnGoingScreen(),
+      floatingActionButton: _FloatingActionButton(),
     );
   }
 }

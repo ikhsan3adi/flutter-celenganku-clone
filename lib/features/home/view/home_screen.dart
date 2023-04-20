@@ -12,10 +12,27 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
+  final List<HomeScreenTab> _screens = [
+    HomeScreenTab(
+      tab: const Tab(text: 'Berlangsung'),
+      screen: const OnGoingPage(),
+      onTap: (BuildContext context) {
+        context.read<OnGoingBloc>().add(FetchWishEvent());
+      },
+    ),
+    HomeScreenTab(
+      tab: const Tab(text: 'Tercapai'),
+      screen: const AchievedPage(),
+      onTap: (BuildContext context) {
+        context.read<AchievedBloc>().add(FetchAchievedWishEvent());
+      },
+    ),
+  ];
+
   @override
   void initState() {
-    _tabController = TabController(length: 2, vsync: this);
     super.initState();
+    _tabController = TabController(length: _screens.length, vsync: this);
   }
 
   @override
@@ -56,18 +73,15 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
           indicatorPadding: const EdgeInsets.symmetric(horizontal: 48),
           indicatorWeight: 3,
           controller: _tabController,
-          tabs: const [
-            Tab(text: 'Berlangsung'),
-            Tab(text: 'Tercapai'),
-          ],
+          onTap: (value) {
+            _screens[value].onTap.call(context);
+          },
+          tabs: _screens.map((e) => e.tab).toList(),
         ),
       ),
       body: TabBarView(
         controller: _tabController,
-        children: const [
-          OnGoingPage(),
-          AchievedPage(),
-        ],
+        children: _screens.map((e) => e.screen).toList(),
       ),
     );
   }
