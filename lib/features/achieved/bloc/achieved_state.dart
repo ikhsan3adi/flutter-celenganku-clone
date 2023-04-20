@@ -13,7 +13,9 @@ class AchievedState extends Equatable {
   List<Object> get props => [wishList];
 }
 
-class AchievedLoadingState extends AchievedState {}
+class AchievedLoadingState extends AchievedState {
+  const AchievedLoadingState({super.wishList});
+}
 
 class AchievedLoadedState extends AchievedState {
   const AchievedLoadedState({super.wishList});

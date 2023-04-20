@@ -15,7 +15,7 @@ class OnGoingBloc extends Bloc<OnGoingEvent, OnGoingState> {
   final WishRepository _wishRepository;
 
   Future<void> _fetchWishList(FetchWishEvent event, Emitter<OnGoingState> emit) async {
-    emit(OnGoingLoadingState().copyWith(wishList: state.wishList));
+    emit(OnGoingLoadingState(wishList: state.wishList));
 
     Future.delayed(
       const Duration(milliseconds: 500),
