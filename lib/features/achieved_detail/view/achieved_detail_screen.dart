@@ -37,11 +37,10 @@ class AchievedDetailScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(20),
                 ),
               ),
-              onPressed: () {
-                context.read<AchievedDetailCubit>().deleteAchievedWish();
-
-                Navigator.pop(context);
-              },
+              onPressed: () => showDialog(
+                context: context,
+                builder: (_) => _showDeleteWishDialog(context),
+              ),
               child: const Text("Hapus", style: TextStyle(fontWeight: FontWeight.bold)),
             ),
           ),
@@ -59,6 +58,27 @@ class AchievedDetailScreen extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  Widget _showDeleteWishDialog(BuildContext context) {
+    return AlertDialog(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      title: const Text('Hapus tabungan?', style: TextStyle(fontSize: 24, fontWeight: FontWeight.normal)),
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.pop(context),
+          child: const Text('Batal'),
+        ),
+        TextButton(
+          onPressed: () {
+            context.read<AchievedDetailCubit>().deleteAchievedWish();
+
+            Navigator.popUntil(context, (route) => route.isFirst);
+          },
+          child: const Text('Hapus'),
+        )
+      ],
     );
   }
 }
