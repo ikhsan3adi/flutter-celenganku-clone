@@ -1,5 +1,6 @@
 import 'package:celenganku_app_clone/features/features.dart';
 import 'package:celenganku_app_clone/shared/shared.dart';
+import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -27,11 +28,23 @@ class MyAppView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<AppThemeCubit, AppThemeState>(
       builder: (context, state) {
-        return MaterialApp(
-          home: const HomePage(),
-          theme: ThemeData(),
-          darkTheme: ThemeData(brightness: Brightness.dark),
-          themeMode: state.themeMode,
+        return DynamicColorBuilder(
+          builder: (ColorScheme? lightDynamic, ColorScheme? darkDynamic) {
+            return MaterialApp(
+              title: 'Flutter Celenganku clone',
+              home: const HomePage(),
+              theme: ThemeData(
+                colorScheme: lightDynamic ?? ColorScheme.fromSwatch(primarySwatch: Colors.blue),
+                useMaterial3: true,
+              ),
+              darkTheme: ThemeData(
+                brightness: Brightness.dark,
+                colorScheme: darkDynamic ?? ColorScheme.fromSwatch(primarySwatch: Colors.blue),
+                useMaterial3: true,
+              ),
+              themeMode: state.themeMode,
+            );
+          },
         );
       },
     );
