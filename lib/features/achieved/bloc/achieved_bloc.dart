@@ -17,7 +17,7 @@ class AchievedBloc extends Bloc<AchievedEvent, AchievedState> {
   Future<void> _fetchWishList(FetchAchievedWishEvent event, Emitter<AchievedState> emit) async {
     emit(AchievedLoadingState(wishList: state.wishList));
 
-    Future.delayed(
+    await Future.delayed(
       const Duration(milliseconds: 500),
       () => emit(AchievedLoadedState(wishList: _wishRepository.getAchievedWishList())),
     );
