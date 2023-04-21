@@ -38,8 +38,11 @@ class MyAppView extends StatelessWidget {
                 useMaterial3: true,
               ),
               darkTheme: ThemeData(
-                brightness: Brightness.dark,
-                colorScheme: darkDynamic ?? ColorScheme.fromSwatch(primarySwatch: Colors.blue),
+                colorScheme: darkDynamic ??
+                    ColorScheme.fromSwatch(
+                      primarySwatch: Colors.blue,
+                      brightness: Brightness.dark,
+                    ),
                 useMaterial3: true,
               ),
               themeMode: state.themeMode,
