@@ -33,6 +33,7 @@ class _FloatingActionButton extends StatelessWidget {
         foregroundColor: theme.colorScheme.onPrimary,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
         padding: const EdgeInsets.all(16),
+      backgroundColor: theme.colorScheme.surface,
       ),
       icon: const Icon(Icons.add),
       label: const Text("Tambah Celengan", style: TextStyle(fontWeight: FontWeight.bold)),

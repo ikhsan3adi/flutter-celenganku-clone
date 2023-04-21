@@ -103,7 +103,9 @@ class MyExpandableFab extends StatelessWidget {
   }
 
   Widget _showDeleteWishDialog(BuildContext context) {
+    ThemeData theme = Theme.of(context);
     return AlertDialog(
+      backgroundColor: theme.colorScheme.surface,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       title: const Text('Hapus tabungan?', style: TextStyle(fontSize: 24, fontWeight: FontWeight.normal)),
       actions: [

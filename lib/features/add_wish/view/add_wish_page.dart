@@ -44,6 +44,7 @@ class _AddWishView extends StatelessWidget {
     GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
     return Scaffold(
+      backgroundColor: theme.colorScheme.surface,
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.transparent,

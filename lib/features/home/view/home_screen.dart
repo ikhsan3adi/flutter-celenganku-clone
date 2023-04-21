@@ -87,8 +87,10 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
   }
 
   Widget _showChangeThemeDialog() {
+    ThemeData theme = Theme.of(context);
     return Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+      backgroundColor: theme.colorScheme.surface,
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 16),
         child: Column(

@@ -6,6 +6,10 @@ class AchievedPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const AchievedScreen();
+    ThemeData theme = Theme.of(context);
+    return Scaffold(
+      backgroundColor: theme.colorScheme.surface,
+      body: const AchievedScreen(),
+    );
   }
 }

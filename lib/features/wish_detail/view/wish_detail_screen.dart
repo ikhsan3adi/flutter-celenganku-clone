@@ -10,6 +10,7 @@ class WishDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
     return Scaffold(
+      backgroundColor: theme.colorScheme.surface,
       appBar: AppBar(
         title: BlocBuilder<WishBloc, WishState>(
           builder: (context, state) {

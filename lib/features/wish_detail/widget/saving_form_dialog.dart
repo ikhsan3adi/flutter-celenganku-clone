@@ -20,11 +20,14 @@ class SavingFormDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ThemeData theme = Theme.of(context);
+
     context.read<WishBloc>().add(SavingNominalChanged(value: '0'));
     context.read<WishBloc>().add(const SavingMessageChanged(message: ''));
     context.read<WishBloc>().add(const SavingNominalValidation(isSavingNominalValid: true));
 
     return AlertDialog(
+      backgroundColor: theme.colorScheme.surface,
       contentPadding: const EdgeInsets.only(top: 20, left: 24, right: 24, bottom: 0),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       title: Text(title, style: const TextStyle(fontSize: 24, fontWeight: FontWeight.normal)),
