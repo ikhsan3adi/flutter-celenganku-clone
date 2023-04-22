@@ -47,11 +47,19 @@ class MyAppView extends StatelessWidget {
               theme: ThemeData(
                 colorScheme: lightColorScheme,
                 useMaterial3: true,
-              ).copyWith(dividerTheme: DividerThemeData(color: lightColorScheme.onSurface.withAlpha(45))),
+                visualDensity: VisualDensity.standard,
+              ).copyWith(
+                dividerTheme: DividerThemeData(color: lightColorScheme.onSurface.withAlpha(45)),
+                iconTheme: IconThemeData(color: lightColorScheme.secondary),
+              ),
               darkTheme: ThemeData(
                 colorScheme: darkColorScheme,
                 useMaterial3: true,
-              ).copyWith(dividerTheme: DividerThemeData(color: darkColorScheme.onSurface.withAlpha(45))),
+                visualDensity: VisualDensity.standard,
+              ).copyWith(
+                dividerTheme: DividerThemeData(color: darkColorScheme.onSurface.withAlpha(45)),
+                iconTheme: IconThemeData(color: darkColorScheme.secondary),
+              ),
               themeMode: state.themeMode,
             );
           },

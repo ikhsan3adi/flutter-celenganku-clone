@@ -72,7 +72,7 @@ class ImagePicker extends StatelessWidget {
               child: SizedBox.expand(
                 child: Material(
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                  color: imagePath != null ? Colors.transparent : theme.colorScheme.primary,
+                  color: imagePath != null ? Colors.transparent : theme.colorScheme.surfaceVariant,
                   child: InkWell(
                     borderRadius: BorderRadius.circular(10),
                     onTap: () async {
@@ -88,7 +88,7 @@ class ImagePicker extends StatelessWidget {
                             child: Icon(
                               Icons.add_photo_alternate_outlined,
                               size: 100,
-                              color: theme.colorScheme.onPrimary,
+                              color: theme.colorScheme.primary,
                             ),
                           ),
                   ),

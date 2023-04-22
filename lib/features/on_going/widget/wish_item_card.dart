@@ -36,7 +36,7 @@ class WishItemCard extends StatelessWidget {
                       aspectRatio: 16 / 9,
                       child: Container(
                         decoration: BoxDecoration(
-                          color: imagePath != null ? null : theme.colorScheme.primary,
+                          color: imagePath != null ? null : theme.colorScheme.surfaceVariant,
                           image: imagePath != null
                               ? DecorationImage(
                                   image: FileImage(File(imagePath)),
@@ -51,7 +51,7 @@ class WishItemCard extends StatelessWidget {
                                 child: Icon(
                                   Icons.landscape_outlined,
                                   size: 100,
-                                  color: theme.colorScheme.onPrimary,
+                                  color: theme.colorScheme.primary,
                                 ),
                               ),
                       ),

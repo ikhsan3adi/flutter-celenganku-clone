@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:celenganku_app_clone/features/achieved/achieved.dart';
 import 'package:celenganku_app_clone/features/achieved_detail/achieved_detail.dart';
 import 'package:celenganku_app_clone/shared/shared.dart';
-import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -38,7 +37,7 @@ class AchievedWishItemCard extends StatelessWidget {
                       aspectRatio: 16 / 9,
                       child: Container(
                         decoration: BoxDecoration(
-                          color: imagePath != null ? null : theme.colorScheme.primary,
+                          color: imagePath != null ? null : theme.colorScheme.surfaceVariant,
                           image: imagePath != null
                               ? DecorationImage(
                                   image: FileImage(File(imagePath)),
@@ -53,7 +52,7 @@ class AchievedWishItemCard extends StatelessWidget {
                                 child: Icon(
                                   Icons.landscape_outlined,
                                   size: 100,
-                                  color: theme.colorScheme.onPrimary,
+                                  color: theme.colorScheme.primary,
                                 ),
                               ),
                       ),
