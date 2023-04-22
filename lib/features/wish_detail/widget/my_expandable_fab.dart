@@ -43,7 +43,7 @@ class MyExpandableFab extends StatelessWidget {
                   onSubmit: () => context.read<WishBloc>().add(const TakeSavingEvent()),
                   formKey: formKey,
                   validator: (value) {
-                    if (int.parse((value).replaceAll('.', '')) > wish.getTotalSaving()) {
+                    if (int.parse((value).replaceAll('.', '')) > context.read<WishBloc>().state.wish.getTotalSaving()) {
                       return 'Nominal tidak boleh melebihi total tabungan terkumpul';
                     }
                     return null;
@@ -65,7 +65,7 @@ class MyExpandableFab extends StatelessWidget {
                 onSubmit: () => context.read<WishBloc>().add(const AddSavingEvent()),
                 formKey: formKey,
                 validator: (value) {
-                  if (int.parse((value).replaceAll('.', '')) > wish.savingTarget - wish.getTotalSaving()) {
+                  if (int.parse((value).replaceAll('.', '')) > wish.savingTarget - context.read<WishBloc>().state.wish.getTotalSaving()) {
                     return 'Nominal yang ditabung melebihi kekurangan';
                   }
                   return null;
