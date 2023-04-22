@@ -30,21 +30,28 @@ class MyAppView extends StatelessWidget {
       builder: (context, state) {
         return DynamicColorBuilder(
           builder: (ColorScheme? lightDynamic, ColorScheme? darkDynamic) {
+            ColorScheme lightColorScheme = lightDynamic?.harmonized() ??
+                ColorScheme.fromSwatch(
+                  primarySwatch: Colors.blue,
+                ).harmonized();
+
+            ColorScheme darkColorScheme = darkDynamic?.harmonized() ??
+                ColorScheme.fromSwatch(
+                  primarySwatch: Colors.blue,
+                  brightness: Brightness.dark,
+                ).harmonized();
+
             return MaterialApp(
               title: 'Flutter Celenganku clone',
               home: const HomePage(),
               theme: ThemeData(
-                colorScheme: lightDynamic ?? ColorScheme.fromSwatch(primarySwatch: Colors.blue),
+                colorScheme: lightColorScheme,
                 useMaterial3: true,
-              ),
+              ).copyWith(dividerTheme: DividerThemeData(color: lightColorScheme.onSurface.withAlpha(45))),
               darkTheme: ThemeData(
-                colorScheme: darkDynamic ??
-                    ColorScheme.fromSwatch(
-                      primarySwatch: Colors.blue,
-                      brightness: Brightness.dark,
-                    ),
+                colorScheme: darkColorScheme,
                 useMaterial3: true,
-              ),
+              ).copyWith(dividerTheme: DividerThemeData(color: darkColorScheme.onSurface.withAlpha(45))),
               themeMode: state.themeMode,
             );
           },
