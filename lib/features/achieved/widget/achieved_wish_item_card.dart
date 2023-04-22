@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:celenganku_app_clone/features/achieved/achieved.dart';
 import 'package:celenganku_app_clone/features/achieved_detail/achieved_detail.dart';
 import 'package:celenganku_app_clone/shared/shared.dart';
+import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -22,7 +23,6 @@ class AchievedWishItemCard extends StatelessWidget {
         children: [
           Card(
             margin: EdgeInsets.zero,
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
             child: Padding(
               padding: const EdgeInsets.all(16),
               child: Column(

@@ -18,7 +18,6 @@ class AchievedSaveHistory extends StatelessWidget {
 
         return Card(
           margin: const EdgeInsets.only(bottom: 128),
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 28),
             child: ListView.builder(

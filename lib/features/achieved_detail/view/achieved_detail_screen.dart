@@ -65,7 +65,6 @@ class AchievedDetailScreen extends StatelessWidget {
   Widget _showDeleteWishDialog(BuildContext context) {
     ThemeData theme = Theme.of(context);
     return AlertDialog(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
       backgroundColor: theme.colorScheme.surface,
       title: const Text('Hapus tabungan?', style: TextStyle(fontSize: 24, fontWeight: FontWeight.normal)),
       actions: [

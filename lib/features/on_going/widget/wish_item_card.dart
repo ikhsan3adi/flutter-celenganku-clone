@@ -21,7 +21,6 @@ class WishItemCard extends StatelessWidget {
         children: [
           Card(
             margin: EdgeInsets.zero,
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
             child: Padding(
               padding: const EdgeInsets.all(16),
               child: Column(

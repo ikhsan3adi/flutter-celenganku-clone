@@ -13,7 +13,6 @@ class AchievedDetailCard extends StatelessWidget {
     ThemeData theme = Theme.of(context);
     return Card(
       margin: EdgeInsets.zero,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       child: BlocBuilder<AchievedDetailCubit, AchievedDetailState>(
         builder: (context, state) {
           final imagePath = state.wish.imagePath;
