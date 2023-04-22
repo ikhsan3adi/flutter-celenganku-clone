@@ -7,6 +7,7 @@ class OnGoingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    context.read<OnGoingBloc>().add(FetchWishEvent());
     ThemeData theme = Theme.of(context);
     return Scaffold(
       backgroundColor: theme.colorScheme.surface,

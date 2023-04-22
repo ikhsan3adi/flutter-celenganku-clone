@@ -13,19 +13,13 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
   late TabController _tabController;
 
   final List<HomeScreenTab> _screens = [
-    HomeScreenTab(
-      tab: const Tab(text: 'Berlangsung'),
-      screen: const OnGoingPage(),
-      onTap: (BuildContext context) {
-        context.read<OnGoingBloc>().add(FetchWishEvent());
-      },
+    const HomeScreenTab(
+      tab: Tab(text: 'Berlangsung'),
+      screen: OnGoingPage(),
     ),
-    HomeScreenTab(
-      tab: const Tab(text: 'Tercapai'),
-      screen: const AchievedPage(),
-      onTap: (BuildContext context) {
-        context.read<AchievedBloc>().add(FetchAchievedWishEvent());
-      },
+    const HomeScreenTab(
+      tab: Tab(text: 'Tercapai'),
+      screen: AchievedPage(),
     ),
   ];
 
@@ -66,9 +60,6 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
         ],
         bottom: TabBar(
           controller: _tabController,
-          onTap: (value) {
-            _screens[value].onTap.call(context);
-          },
           tabs: _screens.map((e) => e.tab).toList(),
         ),
       ),
