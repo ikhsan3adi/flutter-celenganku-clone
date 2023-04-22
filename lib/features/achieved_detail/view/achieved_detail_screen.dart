@@ -31,9 +31,6 @@ class AchievedDetailScreen extends StatelessWidget {
             child: TextButton(
               style: TextButton.styleFrom(
                 padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 24),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20),
-                ),
               ),
               onPressed: () => showDialog(
                 context: context,
@@ -63,6 +60,7 @@ class AchievedDetailScreen extends StatelessWidget {
     ThemeData theme = Theme.of(context);
     return AlertDialog(
       backgroundColor: theme.colorScheme.surface,
+      contentPadding: EdgeInsets.zero,
       title: const Text('Hapus tabungan?', style: TextStyle(fontSize: 24, fontWeight: FontWeight.normal)),
       actions: [
         TextButton(
