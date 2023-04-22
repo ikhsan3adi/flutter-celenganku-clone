@@ -22,7 +22,7 @@ class Wish extends Equatable {
     required this.id,
     required this.name,
     required this.savingTarget,
-    required this.savingPlan,
+    this.savingPlan = SavingPlan.daily,
     required this.savingNominal,
     required this.listSaving,
     required this.createdAt,

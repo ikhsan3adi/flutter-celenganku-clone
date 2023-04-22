@@ -70,28 +70,35 @@ class AddWishScreen extends StatelessWidget {
                 style: theme.textTheme.titleSmall?.copyWith(color: theme.colorScheme.primary),
               ),
               const SizedBox(height: 8),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: const [
-                    CustomRadioOutlinedButton(
-                      borderRadius: BorderRadius.horizontal(left: Radius.circular(50)),
-                      labelText: 'Harian',
-                      value: SavingPlan.daily,
-                    ),
-                    CustomRadioOutlinedButton(
-                      borderRadius: null,
-                      labelText: 'Mingguan',
-                      value: SavingPlan.weekly,
-                    ),
-                    CustomRadioOutlinedButton(
-                      borderRadius: BorderRadius.horizontal(right: Radius.circular(50)),
-                      labelText: 'Bulanan',
-                      value: SavingPlan.monthly,
-                    ),
-                  ],
-                ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  BlocBuilder<AddWishBloc, AddWishState>(
+                    builder: (context, state) {
+                      return SegmentedButton<SavingPlan>(
+                        onSelectionChanged: (newSelection) {
+                          context.read<AddWishBloc>().add(WishSavingPlanChanged(savingPlan: newSelection.first));
+                        },
+                        showSelectedIcon: false,
+                        segments: const [
+                          ButtonSegment(
+                            value: SavingPlan.daily,
+                            label: Text('Harian'),
+                          ),
+                          ButtonSegment(
+                            value: SavingPlan.weekly,
+                            label: Text('Mingguan'),
+                          ),
+                          ButtonSegment(
+                            value: SavingPlan.monthly,
+                            label: Text('Bulanan'),
+                          ),
+                        ],
+                        selected: {state.newWish.savingPlan},
+                      );
+                    },
+                  ),
+                ],
               ),
               BlocBuilder<AddWishBloc, AddWishState>(
                 builder: (context, state) {
