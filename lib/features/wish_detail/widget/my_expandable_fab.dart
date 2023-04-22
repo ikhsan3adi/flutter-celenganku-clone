@@ -10,7 +10,6 @@ class MyExpandableFab extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    ThemeData theme = Theme.of(context);
     Wish wish = context.read<WishBloc>().state.wish;
     GlobalKey<FormState> formKey = GlobalKey<FormState>();
     return ExpandableFab(
@@ -79,10 +78,8 @@ class MyExpandableFab extends StatelessWidget {
         ),
       ],
       closeButtonStyle: ExpandableFabCloseButtonStyle(
-        foregroundColor: theme.colorScheme.onPrimary,
         child: Container(
           decoration: BoxDecoration(
-            color: theme.colorScheme.primary,
             borderRadius: BorderRadius.circular(10),
           ),
           padding: const EdgeInsets.all(16),
@@ -91,7 +88,6 @@ class MyExpandableFab extends StatelessWidget {
       ),
       child: Container(
         decoration: BoxDecoration(
-          color: theme.colorScheme.primary,
           borderRadius: BorderRadius.circular(10),
         ),
         padding: const EdgeInsets.all(16),
@@ -144,7 +140,7 @@ class _FloatingActionButtons extends StatelessWidget {
             Container(
               margin: const EdgeInsets.all(4),
               decoration: BoxDecoration(
-                color: theme.colorScheme.background,
+                color: theme.colorScheme.surfaceVariant,
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Padding(
@@ -155,7 +151,7 @@ class _FloatingActionButtons extends StatelessWidget {
             Container(
               margin: const EdgeInsets.all(4),
               decoration: BoxDecoration(
-                color: theme.colorScheme.background,
+                color: theme.colorScheme.surfaceVariant,
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Padding(
