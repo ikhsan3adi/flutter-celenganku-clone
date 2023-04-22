@@ -13,7 +13,7 @@ class SavingListItem extends StatelessWidget {
       children: [
         const SizedBox(height: 10),
         ListTile(
-          contentPadding: EdgeInsets.zero,
+          contentPadding: const EdgeInsets.only(bottom: 8),
           leading: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
