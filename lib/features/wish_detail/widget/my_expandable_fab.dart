@@ -20,8 +20,6 @@ class MyExpandableFab extends StatelessWidget {
         color: Colors.black.withOpacity(0.5),
       ),
       expandedFabSize: ExpandableFabSize.regular,
-      backgroundColor: theme.colorScheme.primary,
-      foregroundColor: theme.colorScheme.onPrimary,
       children: [
         _FloatingActionButtons(
           onTap: () => showDialog(

@@ -43,12 +43,9 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
 
   @override
   Widget build(BuildContext context) {
-    ThemeData theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Colors.transparent,
-        foregroundColor: theme.textTheme.bodyLarge!.color,
         title: const Text("Celenganku", style: TextStyle(fontWeight: FontWeight.normal)),
         actions: [
           IconButton(
@@ -68,10 +65,6 @@ class _HomeScreenState extends State<HomeScreen> with SingleTickerProviderStateM
           )
         ],
         bottom: TabBar(
-          labelColor: theme.colorScheme.primary,
-          indicatorColor: theme.colorScheme.primary,
-          indicatorPadding: const EdgeInsets.symmetric(horizontal: 48),
-          indicatorWeight: 3,
           controller: _tabController,
           onTap: (value) {
             _screens[value].onTap.call(context);

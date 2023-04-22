@@ -20,9 +20,6 @@ class WishDetailScreen extends StatelessWidget {
             );
           },
         ),
-        elevation: 0,
-        backgroundColor: Colors.transparent,
-        foregroundColor: theme.textTheme.bodyLarge!.color,
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
