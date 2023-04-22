@@ -41,7 +41,7 @@ class WishDetailScreen extends StatelessWidget {
           }
         },
         child: Padding(
-          padding: const EdgeInsets.only(top: 16, right: 16, left: 16),
+          padding: const EdgeInsets.only(right: 16, left: 16),
           child: SingleChildScrollView(
             child: Column(
               children: const [

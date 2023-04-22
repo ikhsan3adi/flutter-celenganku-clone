@@ -12,7 +12,7 @@ class AchievedDetailCard extends StatelessWidget {
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
     return Card(
-      margin: EdgeInsets.zero,
+      margin: const EdgeInsets.only(top: 16),
       child: BlocBuilder<AchievedDetailCubit, AchievedDetailState>(
         builder: (context, state) {
           final imagePath = state.wish.imagePath;
