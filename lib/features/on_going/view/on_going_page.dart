@@ -7,36 +7,19 @@ class OnGoingPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: OnGoingScreen(),
-      floatingActionButton: _FloatingActionButton(),
-    );
-  }
-}
-
-class _FloatingActionButton extends StatelessWidget {
-  const _FloatingActionButton();
-
-  @override
-  Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
-    return ElevatedButton.icon(
-      onPressed: () {
-        Navigator.push(context, AddWishPage.route()).then(
-          (_) {
-            context.read<OnGoingBloc>().add(FetchWishEvent());
-          },
-        );
-      },
-      style: ElevatedButton.styleFrom(
-        backgroundColor: theme.colorScheme.primary,
-        foregroundColor: theme.colorScheme.onPrimary,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-        padding: const EdgeInsets.all(16),
+    return Scaffold(
       backgroundColor: theme.colorScheme.surface,
+      body: const OnGoingScreen(),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {
+          Navigator.push(context, AddWishPage.route()).then(
+            (_) => context.read<OnGoingBloc>().add(FetchWishEvent()),
+          );
+        },
+        label: const Text('Tambah Celengan', style: TextStyle(fontWeight: FontWeight.bold)),
+        icon: const Icon(Icons.add),
       ),
-      icon: const Icon(Icons.add),
-      label: const Text("Tambah Celengan", style: TextStyle(fontWeight: FontWeight.bold)),
     );
   }
 }
