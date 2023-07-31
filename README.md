@@ -1,4 +1,4 @@
-# <p align="center">Flutter Celenganku App Clone</p>
+# Flutter Celenganku App Clone
 
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/ikhsan3adi/flutter_celenganku_app_clone)](https://github.com/ikhsan3adi/flutter-celenganku-clone/releases)
 
