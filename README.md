@@ -1,11 +1,12 @@
 # <p align="center">Flutter Celenganku App Clone</p>
 
-<p align="center">
-<img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/ikhsan3adi/flutter_celenganku_app_clone">
-<img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/ikhsan3adi/flutter_celenganku_app_clone?style=social">
-<img alt="GitHub forks" src="https://img.shields.io/github/forks/ikhsan3adi/flutter_celenganku_app_clone?style=social">
-<img alt="MIT License" src="https://img.shields.io/badge/License-MIT-green.svg">
-</p>
+[![GitHub release (latest by date)](https://img.shields.io/github/v/release/ikhsan3adi/flutter_celenganku_app_clone)](https://github.com/ikhsan3adi/flutter-celenganku-clone/releases)
+
+![GitHub Repo stars](https://img.shields.io/github/stars/ikhsan3adi/flutter_celenganku_app_clone?style=social)
+
+[![GitHub forks](https://img.shields.io/github/forks/ikhsan3adi/flutter_celenganku_app_clone?style=social)](https://github.com/ikhsan3adi/flutter-celenganku-clone/fork)
+
+[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://github.com/ikhsan3adi/flutter-celenganku-clone/blob/master/LICENSE)
 
 Celenganku app clone using flutter with bloc state management
 
