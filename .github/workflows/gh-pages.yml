@@ -28,7 +28,7 @@ jobs:
           flutter pub get
 
       - name: Build
-        run: flutter build web
+        run: flutter build web --base-href "/${{ github.event.repository.name }}/"
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v4
@@ -37,7 +37,7 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./build/web
 
-      - name: Deploy
+      - name: Deploy (Test)
         uses: peaceiris/actions-gh-pages@v4
         if: github.ref != 'refs/heads/main'
         with:
