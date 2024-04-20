@@ -3,49 +3,64 @@ import 'dart:io';
 import 'package:celenganku_app_clone/features/add_wish/add_wish.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:image_cropper/image_cropper.dart' as cropper;
-import 'package:image_picker/image_picker.dart' as picker;
+import 'package:image_cropper/image_cropper.dart';
+import 'package:image_picker/image_picker.dart';
 
-class ImagePicker extends StatelessWidget {
-  const ImagePicker({super.key});
+class ImagePickerWidget extends StatelessWidget {
+  const ImagePickerWidget({super.key});
 
-  static picker.ImagePicker imagePicker = picker.ImagePicker();
+  static ImagePicker imagePicker = ImagePicker();
+  static ImageCropper imageCropper = ImageCropper();
 
   /// Get from camera
   Future<String?> _getFromCamera() async {
-    picker.XFile? image = await imagePicker.pickImage(
-      source: picker.ImageSource.camera,
-    );
+    try {
+      XFile? image = await imagePicker.pickImage(source: ImageSource.camera);
 
-    return image?.path;
+      return image?.path;
+    } catch (e) {
+      debugPrint(e.toString());
+      return null;
+    }
   }
 
   /// Get from gallery
   Future<String?> _getFromGallery() async {
-    picker.XFile? image = await imagePicker.pickImage(
-      source: picker.ImageSource.gallery,
-    );
+    try {
+      XFile? image = await imagePicker.pickImage(source: ImageSource.gallery);
 
-    return image?.path;
+      return image?.path;
+    } catch (e) {
+      debugPrint(e.toString());
+      return null;
+    }
   }
 
   /// Crop Image
   Future<String?> _cropImage(BuildContext context, {required filePath}) async {
-    if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
+    try {
+      CroppedFile? croppedImage = await imageCropper.cropImage(
+        sourcePath: filePath,
+        maxWidth: 1280,
+        aspectRatio: const CropAspectRatio(ratioX: 16, ratioY: 9),
+        uiSettings: [
+          AndroidUiSettings(toolbarTitle: 'Pangkas Foto'),
+          IOSUiSettings(title: 'Pangkas Foto'),
+          WebUiSettings(
+            context: context,
+            viewPort: const CroppieViewPort(
+              width: 1280,
+              height: 720,
+            ),
+          ),
+        ],
+      );
+
+      return croppedImage?.path;
+    } catch (e) {
+      debugPrint(e.toString());
       return filePath;
     }
-    cropper.CroppedFile? croppedImage = await cropper.ImageCropper().cropImage(
-      sourcePath: filePath,
-      maxWidth: 1280,
-      aspectRatio: const cropper.CropAspectRatio(ratioX: 16, ratioY: 9),
-      uiSettings: [
-        cropper.AndroidUiSettings(toolbarTitle: 'Pangkas Foto'),
-        cropper.IOSUiSettings(title: 'Pangkas Foto'),
-        cropper.WebUiSettings(context: context),
-      ],
-    );
-
-    return croppedImage?.path;
   }
 
   @override
@@ -125,12 +140,6 @@ class ImagePicker extends StatelessWidget {
             titleText: 'Kamera',
             iconData: Icons.camera_alt_outlined,
             onTap: () async {
-              if (!Platform.isAndroid && !Platform.isIOS) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Not Supported')),
-                );
-                return;
-              }
               String? path = await _getFromCamera().then(
                 (path) async => await _cropImage(context, filePath: path),
               );
