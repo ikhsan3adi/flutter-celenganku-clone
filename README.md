@@ -11,6 +11,9 @@ This app can help you manage your savings. This app is offline and does not need
 
 ## Live Flutter Web Demo
 
+[![Github Pages](https://github.com/ikhsan3adi/flutter-celenganku-clone/actions/workflows/gh-pages.yml/badge.svg)](https://github.com/ikhsan3adi/flutter-celenganku-clone/actions/workflows/gh-pages.yml)
+[![pages-build-deployment](https://github.com/ikhsan3adi/flutter-celenganku-clone/actions/workflows/pages/pages-build-deployment/badge.svg?branch=gh-pages)](https://github.com/ikhsan3adi/flutter-celenganku-clone/actions/workflows/pages/pages-build-deployment)
+
 > https://ikhsan3adi.github.io/flutter-celenganku-clone/
 
 ## Prerequisites
