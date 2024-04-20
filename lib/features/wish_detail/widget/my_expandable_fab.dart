@@ -18,7 +18,24 @@ class MyExpandableFab extends StatelessWidget {
       overlayStyle: ExpandableFabOverlayStyle(
         color: Colors.black.withOpacity(0.5),
       ),
-      expandedFabSize: ExpandableFabSize.regular,
+      openButtonBuilder: DefaultFloatingActionButtonBuilder(
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+          ),
+          padding: const EdgeInsets.all(16),
+          child: const Icon(Icons.edit),
+        ),
+      ),
+      closeButtonBuilder: DefaultFloatingActionButtonBuilder(
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+          ),
+          padding: const EdgeInsets.all(16),
+          child: const Icon(Icons.close),
+        ),
+      ),
       children: [
         _FloatingActionButtons(
           onTap: () => showDialog(
@@ -40,10 +57,12 @@ class MyExpandableFab extends StatelessWidget {
                 value: context.read<WishBloc>(),
                 child: SavingFormDialog(
                   title: 'Ambil Tabungan',
-                  onSubmit: () => context.read<WishBloc>().add(const TakeSavingEvent()),
+                  onSubmit: () =>
+                      context.read<WishBloc>().add(const TakeSavingEvent()),
                   formKey: formKey,
                   validator: (value) {
-                    if (int.parse((value).replaceAll('.', '')) > context.read<WishBloc>().state.wish.getTotalSaving()) {
+                    if (int.parse((value).replaceAll('.', '')) >
+                        context.read<WishBloc>().state.wish.getTotalSaving()) {
                       return 'Nominal tidak boleh melebihi total tabungan terkumpul';
                     }
                     return null;
@@ -62,10 +81,17 @@ class MyExpandableFab extends StatelessWidget {
               value: context.read<WishBloc>(),
               child: SavingFormDialog(
                 title: 'Menabung',
-                onSubmit: () => context.read<WishBloc>().add(const AddSavingEvent()),
+                onSubmit: () =>
+                    context.read<WishBloc>().add(const AddSavingEvent()),
                 formKey: formKey,
                 validator: (value) {
-                  if (int.parse((value).replaceAll('.', '')) > wish.savingTarget - context.read<WishBloc>().state.wish.getTotalSaving()) {
+                  if (int.parse((value).replaceAll('.', '')) >
+                      wish.savingTarget -
+                          context
+                              .read<WishBloc>()
+                              .state
+                              .wish
+                              .getTotalSaving()) {
                     return 'Nominal yang ditabung melebihi kekurangan';
                   }
                   return null;
@@ -77,22 +103,6 @@ class MyExpandableFab extends StatelessWidget {
           icon: Icons.add,
         ),
       ],
-      closeButtonStyle: ExpandableFabCloseButtonStyle(
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10),
-          ),
-          padding: const EdgeInsets.all(16),
-          child: const Icon(Icons.close),
-        ),
-      ),
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10),
-        ),
-        padding: const EdgeInsets.all(16),
-        child: const Icon(Icons.edit),
-      ),
     );
   }
 
@@ -101,7 +111,8 @@ class MyExpandableFab extends StatelessWidget {
     return AlertDialog(
       backgroundColor: theme.colorScheme.surface,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-      title: const Text('Hapus tabungan?', style: TextStyle(fontSize: 24, fontWeight: FontWeight.normal)),
+      title: const Text('Hapus tabungan?',
+          style: TextStyle(fontSize: 24, fontWeight: FontWeight.normal)),
       actions: [
         TextButton(
           onPressed: () => Navigator.pop(context),
@@ -122,7 +133,8 @@ class MyExpandableFab extends StatelessWidget {
 }
 
 class _FloatingActionButtons extends StatelessWidget {
-  const _FloatingActionButtons({required this.onTap, required this.labelText, required this.icon});
+  const _FloatingActionButtons(
+      {required this.onTap, required this.labelText, required this.icon});
 
   final VoidCallback onTap;
   final String labelText;
@@ -144,8 +156,10 @@ class _FloatingActionButtons extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10),
               ),
               child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12),
-                child: Text(labelText, style: const TextStyle(fontWeight: FontWeight.bold)),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12),
+                child: Text(labelText,
+                    style: const TextStyle(fontWeight: FontWeight.bold)),
               ),
             ),
             Container(
