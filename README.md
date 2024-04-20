@@ -9,12 +9,13 @@ Celenganku app clone using flutter with bloc state management
 
 This app can help you manage your savings. This app is offline and does not need to use mobile data.
 
+## Live Flutter Web Demo
+
+> https://ikhsan3adi.github.io/flutter-celenganku-clone/
 
 ## Prerequisites
 
-- Flutter SDK >= 3.7.0
-- Dart SDK >= 2.19.0
-
+- Flutter SDK >= 3.19.x
 
 ## Screenshots
 

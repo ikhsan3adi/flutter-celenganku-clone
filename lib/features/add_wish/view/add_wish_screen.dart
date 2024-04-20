@@ -19,22 +19,28 @@ class AddWishScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const ImagePicker(),
+              const ImagePickerWidget(),
               BlocBuilder<AddWishBloc, AddWishState>(
                 builder: (context, state) {
                   return MyTextFormField(
                     labelText: 'Nama Tabungan',
                     prefixIcon: Icons.notes,
                     onChanged: (value) {
-                      context.read<AddWishBloc>().add(WishNameChanged(wishName: value ?? ''));
+                      context
+                          .read<AddWishBloc>()
+                          .add(WishNameChanged(wishName: value ?? ''));
                     },
                     validator: (value) {
                       if (value!.isEmpty || value == '') {
-                        context.read<AddWishBloc>().add(const WishNameValidation(isNameValid: false));
+                        context
+                            .read<AddWishBloc>()
+                            .add(const WishNameValidation(isNameValid: false));
 
                         return 'Nama tabungan harus diisi';
                       }
-                      context.read<AddWishBloc>().add(const WishNameValidation(isNameValid: true));
+                      context
+                          .read<AddWishBloc>()
+                          .add(const WishNameValidation(isNameValid: true));
                       return null;
                     },
                     isValid: state.isNameValid,
@@ -49,15 +55,21 @@ class AddWishScreen extends StatelessWidget {
                     prefixText: 'Rp.',
                     isCurrency: true,
                     onChanged: (value) {
-                      context.read<AddWishBloc>().add(WishSavingTargetChanged(value: value ?? '0'));
+                      context
+                          .read<AddWishBloc>()
+                          .add(WishSavingTargetChanged(value: value ?? '0'));
                     },
                     validator: (value) {
                       if (value!.isEmpty || value == '') {
-                        context.read<AddWishBloc>().add(const WishTargetValidation(isSavingTargetValid: false));
+                        context.read<AddWishBloc>().add(
+                            const WishTargetValidation(
+                                isSavingTargetValid: false));
 
                         return 'Target tidak boleh kosong';
                       }
-                      context.read<AddWishBloc>().add(const WishTargetValidation(isSavingTargetValid: true));
+                      context.read<AddWishBloc>().add(
+                          const WishTargetValidation(
+                              isSavingTargetValid: true));
                       return null;
                     },
                     isValid: state.isSavingTargetValid,
@@ -67,7 +79,8 @@ class AddWishScreen extends StatelessWidget {
               const SizedBox(height: 10),
               Text(
                 "Rencana Pengisian",
-                style: theme.textTheme.titleSmall?.copyWith(color: theme.colorScheme.primary),
+                style: theme.textTheme.titleSmall
+                    ?.copyWith(color: theme.colorScheme.primary),
               ),
               const SizedBox(height: 8),
               Row(
@@ -77,7 +90,8 @@ class AddWishScreen extends StatelessWidget {
                     builder: (context, state) {
                       return SegmentedButton<SavingPlan>(
                         onSelectionChanged: (newSelection) {
-                          context.read<AddWishBloc>().add(WishSavingPlanChanged(savingPlan: newSelection.first));
+                          context.read<AddWishBloc>().add(WishSavingPlanChanged(
+                              savingPlan: newSelection.first));
                         },
                         showSelectedIcon: false,
                         segments: const [
@@ -108,19 +122,30 @@ class AddWishScreen extends StatelessWidget {
                     prefixText: 'Rp.',
                     isCurrency: true,
                     onChanged: (value) {
-                      context.read<AddWishBloc>().add(WishSavingNominalChanged(value: value ?? '0'));
+                      context
+                          .read<AddWishBloc>()
+                          .add(WishSavingNominalChanged(value: value ?? '0'));
                     },
                     validator: (value) {
-                      if (value!.isEmpty || value == '' || int.parse((value).replaceAll('.', '')) <= 0) {
-                        context.read<AddWishBloc>().add(const WishNominalValidation(isSavingNominalValid: false));
+                      if (value!.isEmpty ||
+                          value == '' ||
+                          int.parse((value).replaceAll('.', '')) <= 0) {
+                        context.read<AddWishBloc>().add(
+                            const WishNominalValidation(
+                                isSavingNominalValid: false));
 
                         return 'Target per ${Wish.savingPlanTimeName(state.newWish.savingPlan).toLowerCase()} tidak boleh kosong';
-                      } else if (int.parse((value).replaceAll('.', '')) >= state.newWish.savingTarget) {
-                        context.read<AddWishBloc>().add(const WishNominalValidation(isSavingNominalValid: false));
+                      } else if (int.parse((value).replaceAll('.', '')) >=
+                          state.newWish.savingTarget) {
+                        context.read<AddWishBloc>().add(
+                            const WishNominalValidation(
+                                isSavingNominalValid: false));
 
                         return 'Target per ${Wish.savingPlanTimeName(state.newWish.savingPlan).toLowerCase()} harus kurang dari target tabungan';
                       }
-                      context.read<AddWishBloc>().add(const WishNominalValidation(isSavingNominalValid: true));
+                      context.read<AddWishBloc>().add(
+                          const WishNominalValidation(
+                              isSavingNominalValid: true));
                       return null;
                     },
                     isValid: state.isSavingNominalValid,
