@@ -9,32 +9,31 @@ import 'package:image_picker/image_picker.dart' as picker;
 class ImagePicker extends StatelessWidget {
   const ImagePicker({super.key});
 
+  static picker.ImagePicker imagePicker = picker.ImagePicker();
+
   /// Get from camera
   Future<String?> _getFromCamera() async {
-    picker.ImagePicker imagePicker = picker.ImagePicker();
+    picker.XFile? image = await imagePicker.pickImage(
+      source: picker.ImageSource.camera,
+    );
 
-    picker.XFile? image = await imagePicker.pickImage(source: picker.ImageSource.camera);
-
-    if (image != null) {
-      return await _cropImage(filePath: image.path);
-    }
-    return null;
+    return image?.path;
   }
 
   /// Get from gallery
   Future<String?> _getFromGallery() async {
-    picker.ImagePicker imagePicker = picker.ImagePicker();
+    picker.XFile? image = await imagePicker.pickImage(
+      source: picker.ImageSource.gallery,
+    );
 
-    picker.XFile? image = await imagePicker.pickImage(source: picker.ImageSource.gallery);
-
-    if (image != null) {
-      return await _cropImage(filePath: image.path);
-    }
-    return null;
+    return image?.path;
   }
 
   /// Crop Image
-  Future<String?> _cropImage({required filePath}) async {
+  Future<String?> _cropImage(BuildContext context, {required filePath}) async {
+    if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
+      return filePath;
+    }
     cropper.CroppedFile? croppedImage = await cropper.ImageCropper().cropImage(
       sourcePath: filePath,
       maxWidth: 1280,
@@ -42,6 +41,7 @@ class ImagePicker extends StatelessWidget {
       uiSettings: [
         cropper.AndroidUiSettings(toolbarTitle: 'Pangkas Foto'),
         cropper.IOSUiSettings(title: 'Pangkas Foto'),
+        cropper.WebUiSettings(context: context),
       ],
     );
 
@@ -71,14 +71,22 @@ class ImagePicker extends StatelessWidget {
               ),
               child: SizedBox.expand(
                 child: Material(
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-                  color: imagePath != null ? Colors.transparent : theme.colorScheme.surfaceVariant,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  color: imagePath != null
+                      ? Colors.transparent
+                      : theme.colorScheme.surfaceVariant,
                   child: InkWell(
                     borderRadius: BorderRadius.circular(10),
                     onTap: () async {
                       await showModalBottomSheet<void>(
                         context: context,
-                        shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(25))),
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.vertical(
+                            top: Radius.circular(25),
+                          ),
+                        ),
                         builder: (_) => _selectImageSourceModal(context),
                       );
                     },
@@ -117,12 +125,22 @@ class ImagePicker extends StatelessWidget {
             titleText: 'Kamera',
             iconData: Icons.camera_alt_outlined,
             onTap: () async {
-              String? path = await _getFromCamera();
+              if (!Platform.isAndroid && !Platform.isIOS) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(content: Text('Not Supported')),
+                );
+                return;
+              }
+              String? path = await _getFromCamera().then(
+                (path) async => await _cropImage(context, filePath: path),
+              );
 
               if (path == null) return;
 
               if (context.mounted) {
-                context.read<AddWishBloc>().add(WishImageChanged(imagePath: path));
+                context
+                    .read<AddWishBloc>()
+                    .add(WishImageChanged(imagePath: path));
                 Navigator.pop(context);
               }
             },
@@ -131,12 +149,16 @@ class ImagePicker extends StatelessWidget {
             titleText: 'Gallery',
             iconData: Icons.photo_library_outlined,
             onTap: () async {
-              String? path = await _getFromGallery();
+              String? path = await _getFromGallery().then(
+                (path) async => await _cropImage(context, filePath: path),
+              );
 
               if (path == null) return;
 
               if (context.mounted) {
-                context.read<AddWishBloc>().add(WishImageChanged(imagePath: path));
+                context
+                    .read<AddWishBloc>()
+                    .add(WishImageChanged(imagePath: path));
                 Navigator.pop(context);
               }
             },
@@ -168,7 +190,8 @@ class _ImageSourceListTile extends StatelessWidget {
         foregroundColor: theme.colorScheme.onPrimary,
         child: Icon(iconData),
       ),
-      title: Text(titleText, style: const TextStyle(fontWeight: FontWeight.bold)),
+      title:
+          Text(titleText, style: const TextStyle(fontWeight: FontWeight.bold)),
       onTap: onTap,
     );
   }
